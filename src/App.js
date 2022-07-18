@@ -18,6 +18,8 @@ import DefaultContext from './stores/defaultContext';
 
 import {LoadingComponent} from './services/api';
 
+import {getPushNotification, removePushNotification} from './services/api';
+
 const theme = createTheme({
   palette: {
     success: {
@@ -61,8 +63,14 @@ function App() {
 
   const handleNotification = () => {
     Push.create("teste")
-  }
+  };
 
+  useEffect(() => {
+    getPushNotification()
+    return () => {
+      removePushNotification()
+    }
+  }, [])
 
   return (
     <DefaultContext.Provider value={defaultContext}>

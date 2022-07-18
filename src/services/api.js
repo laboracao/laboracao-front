@@ -4,6 +4,8 @@ import React from 'react';
 import { CircularProgress } from '@material-ui/core';
 import styled from 'styled-components';
 import {useSnackbar} from 'notistack';
+import moment from 'moment';
+import Push from 'push.js';
 
 const LoadingWrapper = styled('div')`
   display: block;
@@ -19,6 +21,7 @@ const LoadingWrapper = styled('div')`
   justify-content: center;
   font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
 `
+let push;
 
 const InterceptorHooks = () => {
 
@@ -96,6 +99,69 @@ const getTokenInStorage = () => {
 
 const getUserIdInStorage = () => {
   return sessionStorage.getItem("userid");
+};
+
+const handleNotification = (message) => {
+  Push.create(message)
+};
+
+let waterNotification = false;
+let glEndNotification = false;
+let glStartNotification = false;
+let glMiddleNotification = false;
+
+const pushNotification = (currentHour, gl_end, gl_middle, gl_start, waterPush) => {
+  console.log(currentHour);
+  console.log(gl_end);
+  console.log(gl_middle);
+  console.log(gl_start);
+  console.log(waterPush);
+
+  if(gl_end && !glEndNotification){
+
+  }
+
+  if(gl_middle){
+    
+  }
+
+  if(gl_start){
+    
+  }
+
+  if(waterPush && !waterNotification){
+    handleNotification("Beber água");
+    waterNotification = true;
+  }
+}
+
+const getPushNotification = (dayWeek = 'dom') => {
+
+  const {gl_List} = getUserDataInStorage();
+  const findedNotification = gl_List.find((item) => {return item.day === dayWeek} );
+  const {gl_end, gl_middle, gl_start, water_schedule} = findedNotification;
+
+  push = setInterval(() => {
+    const currentDate = moment(new Date()).format('HH:mm');
+    const waterPush = water_schedule.find((item) => { return item === currentDate})
+    
+    pushNotification(
+      currentDate,
+      `${gl_end.hour}:${gl_end.minute}`,
+      `${gl_middle.hour}:${gl_middle.minute}`,
+      `${gl_start.hour}:${gl_start.minute}`,
+      waterPush
+    );
+
+  }, 1000);
+
+
+}
+
+const removePushNotification = () => {
+  if(push){
+    clearInterval(push);
+  }
 }
 
 function decodeToken(token) {
@@ -122,4 +188,17 @@ function resetStorage() {
   sessionStorage.removeItem("id");
 }
 
-export { API, LoadingComponent, setTokenInStorage, getTokenInStorage, decodeToken, resetStorage, setIdInStorage, getUserIdInStorage, setUserDataInStorage, getUserDataInStorage };
+export {
+  API,
+  LoadingComponent,
+  setTokenInStorage,
+  getTokenInStorage,
+  decodeToken,
+  resetStorage,
+  setIdInStorage,
+  getUserIdInStorage,
+  setUserDataInStorage,
+  getUserDataInStorage,
+  getPushNotification,
+  removePushNotification
+};

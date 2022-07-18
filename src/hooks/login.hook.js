@@ -12,8 +12,8 @@ const LoginHook = () => {
         const data = {email}
 
         API.post('/login', data).then((response) => {
-            const {_id, email, term_accept} = response.data;
-            setUserDataInStorage({_id, email, term_accept});
+            const {_id, email, term_accept, gl_List} = response.data;
+            setUserDataInStorage({_id, email, term_accept, gl_List});
             history.push('/dashboard');
         }).catch((e) => {
             console.log(e);
