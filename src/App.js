@@ -1,4 +1,6 @@
 import react, {useEffect, useState} from 'react';
+import Push from 'push.js';
+
 import { Router } from 'react-router-dom';
 import GlobalStyle from './styles/global';
 
@@ -57,15 +59,25 @@ function App() {
 
   const loading = useSelector(state => state.load);
 
+  const handleNotification = () => {
+    Push.create("teste")
+  }
+
+
   return (
     <DefaultContext.Provider value={defaultContext}>
       <LoadingComponent {...{loading}} />
-        <ThemeProvider theme={theme}>
-          <Router history={history}>
-            <AllRoutes />
-            <GlobalStyle />
-          </Router>
-        </ThemeProvider>
+      <ThemeProvider theme={theme}>
+        <Router history={history}>
+          <AllRoutes />
+          <GlobalStyle />
+        </Router>
+      </ThemeProvider>
+      <div className="App">
+        <header className="App-header">
+          <button onClick={() => handleNotification()}>Push Notification</button>
+        </header>
+      </div>
     </DefaultContext.Provider>
     
   );
