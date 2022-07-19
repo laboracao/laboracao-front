@@ -16,6 +16,7 @@ import styled from 'styled-components';
 import { Divider } from '@material-ui/core';
 
 import SettingsHook from '../../hooks/settings.hook';
+import { min } from 'moment';
 
 const CustomRadioGroup = styled(RadioGroup)`
     flex-direction: row;
@@ -255,6 +256,7 @@ export default function SignUp() {
                                     label="Minuto"
                                     name="minuto4"
                                     autoComplete="lname"
+                                    inputProps={{min: formValues.hora4 == 0 ? 1 : 0}}
                                     // value={minuto4}
                                     // onChange={(e) => setMinuto4(e.target.value)}
                                     onChange={handleFormChange}

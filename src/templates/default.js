@@ -35,8 +35,34 @@ export default function PersistentDrawerLeft({ children }) {
     setOpen(false);
   };
 
+  const handleConvertDay = () => {
+    const currentDate = new Date();
+    const currentDayWeek = currentDate.getDay();
+
+    switch(currentDayWeek){
+      case 1:
+        return 'seg';
+      case 2:
+        return 'ter';
+      case 3:
+        return 'qua';
+      case 4:
+        return 'qui';
+      case 5:
+        return 'sex';
+      case 6:
+        return 'sab';
+      case 7:
+        return 'dom';
+
+      default:
+        return 'dom'
+    }
+  }
+
   useEffect(() => {
-    getPushNotification()
+
+    getPushNotification(handleConvertDay())
     return () => {
       removePushNotification()
     }

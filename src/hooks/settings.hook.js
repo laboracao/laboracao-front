@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from "react";
-import { API, getUserDataInStorage } from "../services/api";
+import { API, getUserDataInStorage, setUserDataInStorage } from "../services/api";
 
 const SettingsHook = () => {
     const {_id} = getUserDataInStorage();
@@ -95,6 +95,7 @@ const SettingsHook = () => {
 
         await API.put(`/users/edit/${_id}`, data).then((response) => {
             setUserData(response.data);
+            setUserDataInStorage(response.data);
         }).catch((e) => {
             console.log(e)
         });

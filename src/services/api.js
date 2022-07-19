@@ -39,7 +39,7 @@ const API = axios.create({
   baseURL: process.env.REACT_APP_API,
   // baseURL: 'https://laboracao-back.herokuapp.com/',
   headers: {
-    'Authorization': sessionStorage.getItem("token"),
+    'Authorization': localStorage.getItem("token"),
     'Content-Type': 'application/json',
     Accept: 'application/json',
   },
@@ -82,19 +82,19 @@ const LoadingComponent = ({loading}) => {
 // })
 
 const setTokenInStorage = (token) => {
-  sessionStorage.setItem("token", token);
+  localStorage.setItem("token", token);
 }
 
 const setIdInStorage = (id) => {
-  sessionStorage.setItem("userid", id);
+  localStorage.setItem("userid", id);
 }
 
 const setUserDataInStorage = (user) => {
-  sessionStorage.setItem('userData', JSON.stringify(user));
+  localStorage.setItem('userData', JSON.stringify(user));
 }
 
 const getUserDataInStorage = () => {
-  return JSON.parse(sessionStorage.getItem('userData'));
+  return JSON.parse(localStorage.getItem('userData'));
 }
 
 const getTokenInStorage = () => {
@@ -102,7 +102,7 @@ const getTokenInStorage = () => {
 }
 
 const getUserIdInStorage = () => {
-  return sessionStorage.getItem("userid");
+  return localStorage.getItem("userid");
 };
 
 const handleNotification = (message) => {
@@ -114,50 +114,81 @@ let glEndNotification = false;
 let glStartNotification = false;
 let glMiddleNotification = false;
 
+let lastWaterNofication = '';
+let lastEndNotification = '';
+let lastStartNotification = '';
+let lastMiddleNotification = '';
+
 const pushNotification = (currentHour, gl_end, gl_middle, gl_start, waterPush) => {
-  // console.log(currentHour);
+  console.log(currentHour);
   // console.log(gl_end);
   // console.log(gl_middle);
   // console.log(gl_start);
-  // console.log(waterPush);
 
-  if(gl_end && !glEndNotification){
-
+  if(gl_end !== lastEndNotification){
+    glEndNotification = false;
   }
 
-  if(gl_middle){
-    
+  if(gl_end == currentHour && !glEndNotification){
+    handleNotification("Exercícios do fim do dia");
+    lastEndNotification = gl_end;
+    glEndNotification = true;
   }
 
-  if(gl_start){
-    
+  if(gl_middle !== lastMiddleNotification){
+    glMiddleNotification = false;
+  }
+
+  if(gl_middle == currentHour && !glMiddleNotification){
+    handleNotification("Exercícios do meio do dia");
+    lastMiddleNotification = gl_middle;
+    glMiddleNotification = true;
+  }
+
+  if(gl_start !== lastStartNotification){
+    glStartNotification = false;
+  }
+
+  if(gl_start == currentHour && !glStartNotification){
+    handleNotification("Exercícios do começo do dia");
+    lastStartNotification = gl_start;
+    glStartNotification = true;
+  }
+
+  if(waterPush !== lastWaterNofication){
+    waterNotification = false;
   }
 
   if(waterPush && !waterNotification){
     handleNotification("Beber água");
+    lastWaterNofication = waterPush;
     waterNotification = true;
   }
 }
 
 const getPushNotification = (dayWeek = 'dom') => {
 
-  // const {gl_List} = getUserDataInStorage();
-  // const findedNotification = gl_List?.find((item) => {return item.day === dayWeek} );
-  // const {gl_end, gl_middle, gl_start, water_schedule} = findedNotification;
+  push = setInterval(() => {
 
-  // push = setInterval(() => {
-  //   const currentDate = moment(new Date()).format('HH:mm');
-  //   const waterPush = water_schedule.find((item) => { return item === currentDate})
-    
-  //   pushNotification(
-  //     currentDate,
-  //     `${gl_end.hour}:${gl_end.minute}`,
-  //     `${gl_middle.hour}:${gl_middle.minute}`,
-  //     `${gl_start.hour}:${gl_start.minute}`,
-  //     waterPush
-  //   );
+  const {gl_List} = getUserDataInStorage();
+  const findedNotification = gl_List?.find((item) => {return item.day === dayWeek} );
+  if(findedNotification){
+    const {gl_end, gl_middle, gl_start, water_schedule} = findedNotification;
+      const currentDate = moment(new Date()).format('HH:mm');
+      const waterPush = water_schedule.find((item) => { return item === currentDate})
+      
+      pushNotification(
+        currentDate,
+        `${gl_end.hour}:${gl_end.minute}`,
+        `${gl_middle.hour}:${gl_middle.minute}`,
+        `${gl_start.hour}:${gl_start.minute}`,
+        waterPush
+      );
+  }
 
-  // }, 1000);
+}, 1000);
+
+  
 
 }
 
@@ -176,19 +207,19 @@ function decodeToken(token) {
 
   const data = JSON.parse(JSON.parse(jsonPayload).userDetails);
 
-  sessionStorage.setItem("username", data.email);
-  sessionStorage.setItem("permission", data.permission);
+  localStorage.setItem("username", data.email);
+  localStorage.setItem("permission", data.permission);
 
   return JSON.parse(JSON.parse(jsonPayload).userDetails);
 
 };
 
 function resetStorage() {
-  sessionStorage.removeItem("token");
-  sessionStorage.removeItem("username");
-  sessionStorage.removeItem("permission");
-  sessionStorage.removeItem("userData");
-  sessionStorage.removeItem("id");
+  localStorage.removeItem("token");
+  localStorage.removeItem("username");
+  localStorage.removeItem("permission");
+  localStorage.removeItem('userData');
+  localStorage.removeItem("id");
 }
 
 export {
