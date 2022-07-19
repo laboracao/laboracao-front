@@ -36,9 +36,8 @@ const InterceptorHooks = () => {
 }
 
 const API = axios.create({
-  // baseURL: process.env.REACT_APP_API,
+  baseURL: process.env.REACT_APP_API,
   // baseURL: 'https://laboracao-back.herokuapp.com/',
-  baseURL: 'http://localhost:8081',
   headers: {
     'Authorization': sessionStorage.getItem("token"),
     'Content-Type': 'application/json',
