@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   Box,
   Card,
@@ -11,6 +11,9 @@ import styled from 'styled-components';
 import { HeaderStyle } from '../styles/header';
 
 import Header from '../components/header.component';
+
+import {getPushNotification, removePushNotification} from '../services/api';
+
 
 const MobileGrid = styled(Grid)`
   @media(max-width: 980px){
@@ -31,6 +34,13 @@ export default function PersistentDrawerLeft({ children }) {
   const handleDrawerClose = () => {
     setOpen(false);
   };
+
+  useEffect(() => {
+    getPushNotification()
+    return () => {
+      removePushNotification()
+    }
+  }, [])
 
   return (
     <>

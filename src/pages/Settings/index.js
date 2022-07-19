@@ -69,7 +69,9 @@ export default function SignUp() {
     minuto4,
     setMinuto4,
     handleSubmit,
-    handleChange
+    handleChange,
+    formValues,
+    handleFormChange
   } = SettingsHook();
 
   return (
@@ -83,7 +85,14 @@ export default function SignUp() {
                     <Grid item xs={12}>
                         <FormControl component="fieldset">
                             <FormLabel component="legend">Dia da semana</FormLabel>
-                            <CustomRadioGroup aria-label="diaSemana" name="diaSemana" value={value} onChange={handleChange}>
+                            <CustomRadioGroup 
+                                aria-label="diaSemana"
+                                name="diaSemana"
+                                value={value}
+                                onChange={handleChange}
+                                // onChange={handleFormChange}
+                                // value={'' || formValues.diaSemana}
+                            >
                                 <FormControlLabel value="dom" control={<Radio />} label="Dom" />
                                 <FormControlLabel value="seg" control={<Radio />} label="Seg" />
                                 <FormControlLabel value="ter" control={<Radio />} label="Ter" />
@@ -102,28 +111,32 @@ export default function SignUp() {
                             <CustomFormWrapper>
                                 <TextField
                                     variant="outlined"
-                                    required
+                                    // type="number"
                                     fullWidth
                                     id="hora1"
                                     size="small"
                                     label="Hora"
                                     name="hora1"
                                     autoComplete="lname"
-                                    value={hora1}
-                                    onChange={(e) => setHora1(e.target.value)}
+                                    // value={hora1}
+                                    // onChange={(e) => setHora1(e.target.value)}
+                                    onChange={handleFormChange}
+                                    value={'' || formValues.hora1}
                                 />
                                 <p>:</p>
                                 <TextField
                                     variant="outlined"
-                                    required
+                                    // type="number"
                                     fullWidth
                                     id="minuto1"
                                     size="small"
                                     label="Minuto"
                                     name="minuto1"
                                     autoComplete="lname"
-                                    value={minuto1}
-                                    onChange={(e) => setMinuto1(e.target.value)}
+                                    // value={minuto1}
+                                    // onChange={(e) => setMinuto1(e.target.value)}
+                                    onChange={handleFormChange}
+                                    value={'' || formValues.minuto1}
                                 />
                             </CustomFormWrapper>
                         </CustomFormWrapper>
@@ -137,29 +150,33 @@ export default function SignUp() {
                             <CustomFormWrapper>
                                 <TextField
                                     variant="outlined"
-                                    required
+                                    // type="number"
                                     fullWidth
                                     id="hora2"
                                     size="small"
                                     label="Hora"
                                     name="hora2"
                                     autoComplete="lname"
-                                    value={hora2}
-                                    onChange={(e) => setHora2(e.target.value)}
+                                    // value={hora2}
+                                    // onChange={(e) => setHora2(e.target.value)}
+                                    onChange={handleFormChange}
+                                    value={'' || formValues.hora2}
 
                                 />
                                 <p>:</p>
                                 <TextField
                                     variant="outlined"
-                                    required
+                                    // type="number"
                                     fullWidth
                                     id="minuto2"
                                     size="small"
                                     label="Minuto"
                                     name="minuto2"
                                     autoComplete="lname"
-                                    value={minuto2}
-                                    onChange={(e) => setMinuto2(e.target.value)}
+                                    // value={minuto2}
+                                    // onChange={(e) => setMinuto2(e.target.value)}
+                                    onChange={handleFormChange}
+                                    value={'' || formValues.minuto2}
 
                                 />
                             </CustomFormWrapper>
@@ -174,29 +191,33 @@ export default function SignUp() {
                             <CustomFormWrapper>
                                 <TextField
                                     variant="outlined"
-                                    required
+                                    // type="number"
                                     fullWidth
                                     id="hora3"
                                     size="small"
                                     label="Hora"
                                     name="hora3"
                                     autoComplete="lname"
-                                    value={hora3}
-                                    onChange={(e) => setHora3(e.target.value)}
+                                    // value={hora3}
+                                    // onChange={(e) => setHora3(e.target.value)}
+                                    onChange={handleFormChange}
+                                    value={'' || formValues.hora3}
 
                                 />
                                 <p>:</p>
                                 <TextField
                                     variant="outlined"
-                                    required
+                                    // type="number"
                                     fullWidth
                                     id="minuto3"
                                     size="small"
                                     label="Minuto"
                                     name="minuto3"
                                     autoComplete="lname"
-                                    value={minuto3}
-                                    onChange={(e) => setMinuto3(e.target.value)}
+                                    // value={minuto3}
+                                    // onChange={(e) => setMinuto3(e.target.value)}
+                                    onChange={handleFormChange}
+                                    value={'' || formValues.minuto3}
 
                                 />
                             </CustomFormWrapper>
@@ -211,29 +232,33 @@ export default function SignUp() {
                             <CustomFormWrapper>
                                 <TextField
                                     variant="outlined"
-                                    required
+                                    // type="number"
                                     fullWidth
                                     id="hora4"
                                     size="small"
                                     label="Hora"
                                     name="hora4"
                                     autoComplete="lname"
-                                    value={hora4}
-                                    onChange={(e) => setHora4(e.target.value)}
+                                    // value={hora4}
+                                    // onChange={(e) => setHora4(e.target.value)}
+                                    onChange={handleFormChange}
+                                    value={'' || formValues.hora4}
 
                                 />
                                 <p>:</p>
                                 <TextField
                                     variant="outlined"
-                                    required
+                                    // type="number"
                                     fullWidth
                                     id="minuto4"
                                     size="small"
                                     label="Minuto"
                                     name="minuto4"
                                     autoComplete="lname"
-                                    value={minuto4}
-                                    onChange={(e) => setMinuto4(e.target.value)}
+                                    // value={minuto4}
+                                    // onChange={(e) => setMinuto4(e.target.value)}
+                                    onChange={handleFormChange}
+                                    value={'' || formValues.minuto4}
 
                                 />
                             </CustomFormWrapper>
