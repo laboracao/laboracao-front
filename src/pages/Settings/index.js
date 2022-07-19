@@ -111,7 +111,7 @@ export default function SignUp() {
                             <CustomFormWrapper>
                                 <TextField
                                     variant="outlined"
-                                    // type="number"
+                                    type="number"
                                     fullWidth
                                     id="hora1"
                                     size="small"
@@ -126,7 +126,7 @@ export default function SignUp() {
                                 <p>:</p>
                                 <TextField
                                     variant="outlined"
-                                    // type="number"
+                                    type="number"
                                     fullWidth
                                     id="minuto1"
                                     size="small"
@@ -150,7 +150,7 @@ export default function SignUp() {
                             <CustomFormWrapper>
                                 <TextField
                                     variant="outlined"
-                                    // type="number"
+                                    type="number"
                                     fullWidth
                                     id="hora2"
                                     size="small"
@@ -166,7 +166,7 @@ export default function SignUp() {
                                 <p>:</p>
                                 <TextField
                                     variant="outlined"
-                                    // type="number"
+                                    type="number"
                                     fullWidth
                                     id="minuto2"
                                     size="small"
@@ -191,7 +191,7 @@ export default function SignUp() {
                             <CustomFormWrapper>
                                 <TextField
                                     variant="outlined"
-                                    // type="number"
+                                    type="number"
                                     fullWidth
                                     id="hora3"
                                     size="small"
@@ -207,7 +207,7 @@ export default function SignUp() {
                                 <p>:</p>
                                 <TextField
                                     variant="outlined"
-                                    // type="number"
+                                    type="number"
                                     fullWidth
                                     id="minuto3"
                                     size="small"
@@ -232,7 +232,7 @@ export default function SignUp() {
                             <CustomFormWrapper>
                                 <TextField
                                     variant="outlined"
-                                    // type="number"
+                                    type="number"
                                     fullWidth
                                     id="hora4"
                                     size="small"
@@ -248,7 +248,7 @@ export default function SignUp() {
                                 <p>:</p>
                                 <TextField
                                     variant="outlined"
-                                    // type="number"
+                                    type="number"
                                     fullWidth
                                     id="minuto4"
                                     size="small"
