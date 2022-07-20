@@ -9,7 +9,7 @@ const ExercisesHook = () => {
     const [quantity, setQuantity] = useState('');
     const [exerciseList, setExerciseList] = useState([]);
     const [generatedExercises, setGeneratedExercises] = useState([]);
-    const [show, setShow] = useState(false);
+    const [showExercisesModal, setShowExercisesModal] = useState(false);
     const [userData, setUserData] = useState({});
 
     const translateExercise = (exercise) => {
@@ -47,15 +47,24 @@ const ExercisesHook = () => {
     };
 
     const handleCloseModal = () => {
-        setShow(false);
+        setShowExercisesModal(false);
     };
 
     const handleGenerateExercise = () =>{
-        let data = {};
+        // let data = {};
 
-        exerciseList.map((item) => {
-            data[item.exercise] = item.quantity
-        });
+        // exerciseList.map((item) => {
+        //     data[item.exercise] = item.quantity
+        // });
+
+        const data = {
+            arm: "3",
+            eyes: "3",
+            hands: "4",
+            legsAndFeet: "4",
+            neck: "3",
+            spine: "3"
+        }
 
         API.post('/exercises', data).then((response) => {
             setGeneratedExercises(response.data);
@@ -69,7 +78,7 @@ const ExercisesHook = () => {
 
         if(exercises?.length > 0){
             API.put(`/users/edit/${_id}`, {exercises: exercises}).then((response) => {
-                setShow(true);
+                setShowExercisesModal(true);
                 setUserData(response.data);
             }).catch((e) => {
                 console.log(e);
@@ -89,8 +98,8 @@ const ExercisesHook = () => {
         handleSubmit,
         handleDeleteExercise,
         handleGenerateExercise,
-        show,
-        setShow,
+        showExercisesModal,
+        setShowExercisesModal,
         handleCloseModal,
         userData
     }

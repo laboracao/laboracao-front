@@ -5,6 +5,7 @@ import Modal from "../../components/modal.component";
 import ExercisesModal from '../../components/exercisesModal.component';
 import DashboardHook from "../../hooks/dashboard.hook";
 import ExerciseHook from "../../hooks/exercise.hook";
+import ExercisesHook from "../../hooks/exercises.hook";
 
 const Dashboard = () => {
 
@@ -29,8 +30,26 @@ const Dashboard = () => {
     } = DashboardHook();
 
     const {
+        handleGenerateExercise,
+        showExercisesModal,
+        setShowExercisesModal
+    } = ExercisesHook()
+
+    const {
         handleOpenExercise
     } = ExerciseHook();
+
+    useEffect(() => {
+        if(showExercisesModal){
+            setShowExercises(true);
+        }
+    }, [showExercisesModal]);
+
+    useEffect(() => {
+        if(!showExercises){
+            setShowExercisesModal(false);
+        }
+    }, [showExercises]);
     
     return(
         <Container component="main" maxWidth="lg">
@@ -40,7 +59,11 @@ const Dashboard = () => {
             <Box pt={2}>
                 <Grid container spacing={3}>
                     <Grid item xs={12} md={4}>
-                        <CardComponent title="Exercícios" ajust={'30px'} bg={3} {...{action: () => history.push('/exercises')}} />
+                        <CardComponent title="Exercícios" ajust={'30px'} bg={3}>
+                            <Button color="primary" variant="contained" fullWidth onClick={() => handleGenerateExercise()}>
+                                Gerar exercícios
+                            </Button>
+                        </CardComponent>
                     </Grid>
                     <Grid item xs={12} md={4}>
                         <CardComponent title="Informações" ajust={'120px'} bg={2} {...{action: () => setShowInformation(true)}}/>

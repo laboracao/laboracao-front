@@ -20,7 +20,10 @@ const CustomCard = styled(Card)`
 `;
 
 const CardContent = styled('div')`
-
+    display: block;
+    position: relative;
+    z-index: 1;
+    width: 100%;
 `
 
 const CardTitle = styled(Typography)`
@@ -57,16 +60,19 @@ const Bg = ({img, ajust, ajustDesktop}) => {
     )
 }
 
-const CardComponent = ({title, bg, ajust, action, ajustDesktop}) => {
+const CardComponent = ({title, bg, ajust, action, ajustDesktop, children}) => {
 
     const img = bg === 1 ? img1 : bg === 2 ? img2 : bg === 3 ? img3 : img4;
 
     return (
         <CustomCard bg={img} onClick={action && action}>
-            <Box>
+            <Box width="100%">
                 <CardTitle>
                     {title}
                 </CardTitle>
+                <CardContent>
+                    {children}
+                </CardContent>
             </Box>
             <Bg {...{img, ajust, ajustDesktop}}/>
         </CustomCard>

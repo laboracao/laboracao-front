@@ -120,7 +120,7 @@ let lastStartNotification = '';
 let lastMiddleNotification = '';
 
 const pushNotification = (currentHour, gl_end, gl_middle, gl_start, waterPush) => {
-  console.log(currentHour);
+  // console.log(currentHour);
   // console.log(gl_end);
   // console.log(gl_middle);
   // console.log(gl_start);

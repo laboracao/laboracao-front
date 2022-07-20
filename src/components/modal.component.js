@@ -68,7 +68,6 @@ const ModalComponent = ({show, setShow, onClick, buttonLabel, modalTitle, childr
                                     </CardContent>
                                 </Card>
                             </Box>
-                            
                         </ModalBody>
                     )}
                 </div>
