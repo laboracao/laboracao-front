@@ -161,13 +161,12 @@ const Header = ({ open, handleDrawerOpen, handleDrawerClose }) => {
               </ListItemIcon>
               <ListItemText primary={"Home"} />
             </CustomListItem>
-
-            <CustomListItem button onClick={() => { history.push("/exercises") }}>
+            {/* <CustomListItem button onClick={() => { history.push("/exercises") }}>
               <ListItemIcon>
                 <DirectionsRunIcon />
               </ListItemIcon>
               <ListItemText primary={"Exercícios"} />
-            </CustomListItem>
+            </CustomListItem> */}
 
             <CustomListItem button onClick={() => { history.push(`/settings`) }}>
               <ListItemIcon>

@@ -16,6 +16,7 @@ const AchievementsModal = styled('div')`
     align-items: center;
     justify-content: center;
     font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
+    
 `;
 
 const AchievementsModalWrapper = styled('div')`
@@ -27,6 +28,10 @@ const AchievementsModalWrapper = styled('div')`
     flex-direction: column;
     justify-content: space-between;
     padding: 20px;
+    @media(max-width: 960px){
+        width: 90%;
+        min-height: 95vh;
+    }
 `;
 
 const ModalTitle = styled('div')`
@@ -36,9 +41,11 @@ const ModalTitle = styled('div')`
 const ModalBody = styled('div')`
     // display: flex;
     // justify-content: flex-start;
-    max-height: 60vh;
+    min-height: 60vh;
+    max-height: 73vh;
     overflow-y: auto;
     margin-bottom: 20px;
+    
 `
 
 const ModalTitleLabel = styled(Typography)`
