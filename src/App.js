@@ -79,11 +79,11 @@ function App() {
           <GlobalStyle />
         </Router>
       </ThemeProvider>
-      <div className="App">
+      {/* <div className="App">
         <header className="App-header">
           <button onClick={() => handleNotification()}>Push Notification</button>
         </header>
-      </div>
+      </div> */}
     </DefaultContext.Provider>
     
   );
