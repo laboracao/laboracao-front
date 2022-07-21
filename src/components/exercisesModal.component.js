@@ -1,7 +1,8 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import {Box, Card, CardContent, Typography} from '@material-ui/core';
 import Modal from './modal.component';
 import styled from 'styled-components';
+import {API, getUserDataInStorage} from '../services/api';
 
 const CustomCard = styled(Card)`
     border-radius: 0px;
@@ -13,7 +14,21 @@ const CustomCardContent = styled(CardContent)`
     padding: 8px;
 `
 
-const ExercisesModal = ({setShow, show, handleCloseModal, handleOpenExercise, buttonLabel, modalTitle, userData}) => {
+const ExercisesModal = ({setShow, show, handleCloseModal, handleOpenExercise, buttonLabel, modalTitle}) => {
+
+    const {_id} = getUserDataInStorage();
+    const [userData, setUserData] = useState({});
+
+    useEffect(() => {
+        if(show){
+            API.get(`/users/${_id}`).then((response) => {
+                setUserData(response.data);
+            }).catch((e) => {
+                console.log(e)
+            })
+        }
+    }, [show]);
+
 
     return (
         <Modal {...{setShow, show, onClick: handleOpenExercise, buttonLabel, modalTitle, onClose: handleCloseModal}}>

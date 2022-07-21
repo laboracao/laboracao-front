@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {useHistory, useParams} from 'react-router-dom';
 import Dashboard from '../pages/Dashboard';
-import {API} from '../services/api'
+import {API, getUserDataInStorage} from '../services/api'
 import DashboardHook from './dashboard.hook';
 
 let timeInterval = false;
@@ -10,7 +10,7 @@ let repeatCounter = 0;
 
 const ExerciseHook = () => {
 
-    const {_id} = DashboardHook();
+    const {_id} = getUserDataInStorage();
     const {id} = useParams();
     const history = useHistory();
     const [exerciseData, setExerciseData] = useState({});

@@ -2,6 +2,9 @@ import React, {useState, useEffect} from 'react';
 import {getUserDataInStorage, API, setUserDataInStorage} from '../services/api';
 import {useHistory} from 'react-router-dom';
 
+import ExerciseHook from "./exercise.hook";
+import ExercisesHook from "./exercises.hook";
+
 const DashboardHook = () => {
 
     const history = useHistory();
@@ -15,6 +18,16 @@ const DashboardHook = () => {
     const [showInformation, setShowInformation] = useState(null);
     const [informationContent, setInformationContent] = useState({});
     const [cheatContent, setCheatContent] = useState({});
+
+    // const {
+    //     handleGenerateExercise,
+    //     showExercisesModal,
+    //     setShowExercisesModal
+    // } = ExercisesHook()
+
+    // const {
+    //     handleOpenExercise
+    // } = ExerciseHook();
 
     const handleAcceptTerm = async () => {
         const data = {term_accept: true};

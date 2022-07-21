@@ -1,16 +1,18 @@
 import React, {useEffect, useState} from 'react';
-import {API} from '../services/api'
+import {API, getUserDataInStorage} from '../services/api'
 import DashboardHook from './dashboard.hook';
 
 const ExercisesHook = () => {
 
-    const {_id} = DashboardHook();
+    const {_id} = getUserDataInStorage();
     const [value, setValue] = useState('');
     const [quantity, setQuantity] = useState('');
     const [exerciseList, setExerciseList] = useState([]);
     const [generatedExercises, setGeneratedExercises] = useState([]);
     const [showExercisesModal, setShowExercisesModal] = useState(false);
     const [userData, setUserData] = useState({});
+
+    console.log(_id);
 
     const translateExercise = (exercise) => {
         switch(exercise){
@@ -66,25 +68,28 @@ const ExercisesHook = () => {
             spine: "3"
         }
 
-        API.post('/exercises', data).then((response) => {
-            setGeneratedExercises(response.data);
+        API.post(`/users/${_id}/generate-exercises`, data).then((response) => {
+            setUserData(response.data);
+            setShowExercisesModal(true);
         }).catch((e) => {
             console.log(e)
         })
     };
 
-    useEffect(() => {
-        const {exercises} = generatedExercises;
+    // useEffect(() => {
+        // const {exercises} = generatedExercises;
 
-        if(exercises?.length > 0){
-            API.put(`/users/edit/${_id}`, {exercises: exercises}).then((response) => {
-                setShowExercisesModal(true);
-                setUserData(response.data);
-            }).catch((e) => {
-                console.log(e);
-            });
-        }
-    }, [generatedExercises])
+        // setShowExercisesModal(true);
+
+        // if(exercises?.length > 0){
+        //     API.put(`/users/edit/${_id}`, {exercises: exercises}).then((response) => {
+        //         setShowExercisesModal(true);
+        //         setUserData(response.data);
+        //     }).catch((e) => {
+        //         console.log(e);
+        //     });
+        // }
+    // }, [generatedExercises])
 
     return {
         value,

@@ -60,7 +60,12 @@ const Dashboard = () => {
                 <Grid container spacing={3}>
                     <Grid item xs={12} md={4}>
                         <CardComponent title="Exercícios" ajust={'30px'} bg={3}>
-                            <Button color="primary" variant="contained" fullWidth onClick={() => handleGenerateExercise()}>
+                            <Button
+                                color="primary"
+                                variant="contained"
+                                fullWidth
+                                onClick={() => handleGenerateExercise()}
+                            >
                                 Gerar exercícios
                             </Button>
                         </CardComponent>
