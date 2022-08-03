@@ -12,8 +12,6 @@ const ExercisesHook = () => {
     const [showExercisesModal, setShowExercisesModal] = useState(false);
     const [userData, setUserData] = useState({});
 
-    console.log(_id);
-
     const translateExercise = (exercise) => {
         switch(exercise){
             case 'neck':

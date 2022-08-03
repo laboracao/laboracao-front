@@ -2,9 +2,6 @@ import React, {useState, useEffect} from 'react';
 import {getUserDataInStorage, API, setUserDataInStorage} from '../services/api';
 import {useHistory} from 'react-router-dom';
 
-import ExerciseHook from "./exercise.hook";
-import ExercisesHook from "./exercises.hook";
-
 const DashboardHook = () => {
 
     const history = useHistory();
@@ -19,22 +16,21 @@ const DashboardHook = () => {
     const [informationContent, setInformationContent] = useState({});
     const [cheatContent, setCheatContent] = useState({});
 
-    // const {
-    //     handleGenerateExercise,
-    //     showExercisesModal,
-    //     setShowExercisesModal
-    // } = ExercisesHook()
-
-    // const {
-    //     handleOpenExercise
-    // } = ExerciseHook();
-
     const handleAcceptTerm = async () => {
         const data = {term_accept: true};
         await API.put(`/users/edit/${_id}`, data).then((response) => {
             const {_id, email, term_accept} = response.data;
             setUserDataInStorage({_id, email, term_accept});
             setShow(false);
+        }).catch((e) => {
+            console.log(e)
+        })
+    };
+
+    const handleOpenExercise = () => {
+        API.get(`/users/${_id}/exercises`).then((response) => {
+            const {data} = response;
+            history.push(`/exercise/${data[0].id}`);
         }).catch((e) => {
             console.log(e)
         })
@@ -107,7 +103,8 @@ const DashboardHook = () => {
         informationContent,
         setInformationContent,
         handleGetCheat,
-        cheatContent
+        cheatContent,
+        handleOpenExercise
     }
 };
 

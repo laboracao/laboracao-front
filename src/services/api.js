@@ -169,26 +169,22 @@ const pushNotification = (currentHour, gl_end, gl_middle, gl_start, waterPush) =
 const getPushNotification = (dayWeek = 'dom') => {
 
   push = setInterval(() => {
-
-  const {gl_List} = getUserDataInStorage();
-  const findedNotification = gl_List?.find((item) => {return item.day === dayWeek} );
-  if(findedNotification){
-    const {gl_end, gl_middle, gl_start, water_schedule} = findedNotification;
-      const currentDate = moment(new Date()).format('HH:mm');
-      const waterPush = water_schedule.find((item) => { return item === currentDate})
-      
-      pushNotification(
-        currentDate,
-        `${gl_end.hour}:${gl_end.minute}`,
-        `${gl_middle.hour}:${gl_middle.minute}`,
-        `${gl_start.hour}:${gl_start.minute}`,
-        waterPush
-      );
-  }
-
-}, 1000);
-
-  
+    const {gl_List} = getUserDataInStorage();
+    const findedNotification = gl_List?.find((item) => {return item.day === dayWeek} );
+    if(findedNotification){
+      const {gl_end, gl_middle, gl_start, water_schedule} = findedNotification;
+        const currentDate = moment(new Date()).format('HH:mm');
+        const waterPush = water_schedule.find((item) => { return item === currentDate})
+        
+        pushNotification(
+          currentDate,
+          `${gl_end.hour}:${gl_end.minute}`,
+          `${gl_middle.hour}:${gl_middle.minute}`,
+          `${gl_start.hour}:${gl_start.minute}`,
+          waterPush
+        );
+    }
+  }, 60000);
 
 }
 

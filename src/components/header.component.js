@@ -25,7 +25,7 @@ import ListAltIcon from '@material-ui/icons/ListAlt';
 import LocalOfferIcon from '@material-ui/icons/LocalOffer';
 import GroupIcon from '@material-ui/icons/Group';
 
-import { resetStorage } from '../services/api';
+import { getUserDataInStorage, resetStorage, getUserIdInStorage } from '../services/api';
 
 import { HeaderStyle } from '../styles/header';
 import { PowerSettingsNew } from '@material-ui/icons';
@@ -33,8 +33,6 @@ import { PowerSettingsNew } from '@material-ui/icons';
 import styled from 'styled-components';
 
 import { COLORS } from '../styles/colors';
-
-import { API, getUserIdInStorage } from '../services/api'
 
 const StudentComponent = styled('div')`
   display: flex;
@@ -51,9 +49,8 @@ const StudentWrapper = styled('div')`
 const CustonTitle = styled(Typography)`
   font-weight: bold;
   line-height: inherit;
-  padding-left: 40px;
   span{
-    font-size: 20px;
+    font-size: 30px;
   }
 `;
 
@@ -87,6 +84,7 @@ const Header = ({ open, handleDrawerOpen, handleDrawerClose }) => {
   const classes = HeaderStyle();
   const theme = useTheme();
   const userid = getUserIdInStorage();
+  const userData = getUserDataInStorage();
 
   const handleLogout = async () => {
     try {
@@ -117,16 +115,17 @@ const Header = ({ open, handleDrawerOpen, handleDrawerClose }) => {
             >
               <MenuIcon />
             </IconButton>
+            {/* <CustonTitle>
+              <span className="main-text">BE</span>
+              <span className="primary-text">TO</span>
+            </CustonTitle> */}
           </div>
           <StudentComponent>
             <StudentWrapper>
-              <Typography className="primary-text desktop">
+              <Typography className="primary-text">
                 <b>
-                  Aluno X
+                  {userData.email}
                 </b>
-              </Typography>
-              <Typography variant="subtitle2" className="main-text desktop">
-                alunox@alunox.com
               </Typography>
             </StudentWrapper>
             <IconButton color="primary" onClick={() => handleLogout()}>
@@ -146,10 +145,13 @@ const Header = ({ open, handleDrawerOpen, handleDrawerClose }) => {
       >
         <div>
           <div className={classes.drawerHeader}>
-            <CustonTitle>
-              <span className="main-text">LABOR</span>
-              <span className="primary-text">AÇÃO</span>
-            </CustonTitle>
+            <div style={{width: '100%', display: 'flex', justifyContent: 'center'}}>
+              <CustonTitle>
+                <span className="main-text">BE</span>
+                <span className="primary-text">TO</span>
+              </CustonTitle>
+            </div>
+            
             <IconButton onClick={handleDrawerClose} className="main-text">
               {theme.direction === 'ltr' ? <ChevronLeftIcon /> : <ChevronRightIcon />}
             </IconButton>

@@ -123,12 +123,16 @@ const ExerciseHook = () => {
   }, [count, exerciseData, barWidth]);
 
   useEffect(() => {
-    setTimeout(() => {
+    const repeatInterval = setTimeout(() => {
       if(exerciseData.repeatLimit === repeatCount){
         handleNewExercise(exerciseData.nextId);
         handleRefreshCount();
       }
-    }, 1000)
+    }, 1000);
+
+    return () => {
+        clearInterval(repeatInterval);
+    }
   }, [repeatCount]);
 
     useEffect(() => {

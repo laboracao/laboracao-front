@@ -44,7 +44,10 @@ export default function SignIn() {
           <LockOutlinedIcon />
         </Avatar>
         <Typography component="h1" variant="h5">
-          Laboração
+          BETO
+        </Typography>
+        <Typography component="p" variant="p">
+          <b>B</b>em <b>E</b>star no <b>T</b>rabalh<b>O</b>
         </Typography>
         <div className={classes.form}>
           <TextField
@@ -52,7 +55,7 @@ export default function SignIn() {
             required
             fullWidth
             id="email"
-            label="Email Address"
+            label="E-mail"
             name="email"
             type="email"
             autoComplete="email"

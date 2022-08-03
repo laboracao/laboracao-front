@@ -17,7 +17,7 @@ const Dashboard = () => {
         userData,
         handleCloseModal,
         handleOpenExerciseModal,
-        history,
+        handleOpenExercise,
         termContent,
         handleAcceptTerm,
         showCheat,
@@ -34,10 +34,6 @@ const Dashboard = () => {
         showExercisesModal,
         setShowExercisesModal
     } = ExercisesHook()
-
-    const {
-        handleOpenExercise
-    } = ExerciseHook();
 
     useEffect(() => {
         if(showExercisesModal){

@@ -20,7 +20,7 @@ const AchievementsModal = styled('div')`
 `;
 
 const AchievementsModalWrapper = styled('div')`
-    width: ${(props) => props.width || '50'}%;
+    // width: ${(props) => props.width || '50'}%;
     min-height: 300px;
     margin: auto;
     border-radius: 20px;
@@ -59,6 +59,9 @@ const ModalActions = styled('div')`
 `
 
 const ModalComponent = ({show, setShow, onClick, buttonLabel, modalTitle, children, onClose, width}) => {
+
+    console.log(children);
+
     return show && (
         <AchievementsModal>
             <AchievementsModalWrapper className='main-background' {...{width}}>
