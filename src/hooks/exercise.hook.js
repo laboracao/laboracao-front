@@ -126,8 +126,11 @@ const ExerciseHook = () => {
                 newSound.play();
                 setIsPaused(true);
                 clearInterval(timeInterval);
-                handleNewExercise(exerciseData.nextId);
                 handleRefreshCount();
+                if(exerciseData.nextId === null){
+                    handleGetSentence();
+                    setShowSentence(true);
+                }
             }
         }, 1000);
     }
