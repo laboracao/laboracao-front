@@ -21,16 +21,17 @@ const AchievementsModal = styled('div')`
 
 const AchievementsModalWrapper = styled('div')`
     // width: ${(props) => props.width || '50'}%;
-    min-height: 300px;
+    min-height: auto;
     margin: auto;
     border-radius: 20px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     padding: 20px;
+    background: ${COLORS.primary};
     @media(max-width: 960px){
         width: 90%;
-        min-height: 95vh;
+        min-height: auto;
     }
 `;
 
@@ -41,7 +42,7 @@ const ModalTitle = styled('div')`
 const ModalBody = styled('div')`
     // display: flex;
     // justify-content: flex-start;
-    min-height: 60vh;
+    min-height: auto;
     max-height: 73vh;
     overflow-y: auto;
     margin-bottom: 20px;
@@ -49,7 +50,7 @@ const ModalBody = styled('div')`
 `
 
 const ModalTitleLabel = styled(Typography)`
-    color: ${COLORS.primary};
+    color: ${COLORS.light0};
     font-size: 1.28rem;
 `;
 
@@ -62,30 +63,24 @@ const ModalComponent = ({show, setShow, onClick, buttonLabel, modalTitle, childr
 
     return show && (
         <AchievementsModal>
-            <AchievementsModalWrapper className='main-background' {...{width}}>
+            <AchievementsModalWrapper {...{width}}>
                 <div>
                     <ModalTitle>
-                        <ModalTitleLabel className="main-text">{modalTitle}</ModalTitleLabel>
+                        <ModalTitleLabel>{modalTitle}</ModalTitleLabel>
                     </ModalTitle>
                     {children && (
                         <ModalBody>
-                            <Box width={"100%"}>
-                                <Card>
-                                    <CardContent>
-                                        {children}
-                                    </CardContent>
-                                </Card>
-                            </Box>
+                            {children}
                         </ModalBody>
                     )}
                 </div>
                 <ModalActions>
                     {onClose && (
-                        <Button color="primary" variant="outlined" onClick={onClose}>
+                        <Button color="secondary" variant="outlined" onClick={onClose}>
                             Fechar
                         </Button>
                     )}
-                    <Button color="primary" variant="contained" onClick={onClick}>
+                    <Button color="secondary" variant="contained" onClick={onClick}>
                         {buttonLabel}
                     </Button>
                 </ModalActions>

@@ -3,10 +3,13 @@ import {useHistory, useParams} from 'react-router-dom';
 import Dashboard from '../pages/Dashboard';
 import {API, getUserDataInStorage} from '../services/api'
 import DashboardHook from './dashboard.hook';
+import Push from 'push.js';
+import sound from '../assets/notification.ogg';
 
 let timeInterval = false;
 let counter = 0;
 let repeatCounter = 0;
+const newSound = new Audio(sound);
 
 const ExerciseHook = () => {
 
@@ -18,9 +21,15 @@ const ExerciseHook = () => {
     const [barWidth, setBarWidth] = useState(0);
     const [count, setCount] = useState(0);
     const [repeatCount, setRepeatCount] = useState(0);
-    const [isPaused, setIsPaused] = useState(false);
+    const [isPaused, setIsPaused] = useState(true);
     const [show, setShow] = useState(false);
     const [cheat, setCheat] = useState({});
+    const [sentence, setSentence] = useState({});
+    const [showSentence, setShowSentence] = useState(false);
+
+    const handleNotification = () => {
+        Push.create("Fim do exercício")
+      };
 
     const handlePause = (paused) => {
         setIsPaused(paused);
@@ -28,6 +37,7 @@ const ExerciseHook = () => {
 
     const handleClose = () => {
         setShow(false);
+        setShowSentence(false);
     };
 
     const handleFinishExercises = () => {
@@ -57,6 +67,15 @@ const ExerciseHook = () => {
             console.log(e)
         })
     };
+
+    const handleGetSentence = () => {
+        API.get(`/sentences`).then((response) => {
+            const {data} = response;
+            setSentence(data);
+        }).catch((e) => {
+            console.log(e)
+        })
+    }
 
     const handleGetExercises = (id) => {
         API.get(`/users/${_id}/exercises`).then((response) => {
@@ -91,23 +110,37 @@ const ExerciseHook = () => {
         }
         if(id === null){
             handleGetCheat();
-            setShow(true);
+            setShowSentence(true);
             handleRefreshCount();
             clearInterval(timeInterval);
+            handleGetSentence();
         }
     };
 
   useEffect(() => {
-    timeInterval = setInterval(() => {
-        if(!isPaused){
+    if(!isPaused){
+        timeInterval = setInterval(() => {
             setCount(counter + 1);
             counter ++;
-        }
-    }, 1000);
+            if(exerciseData.time === counter){
+                newSound.play();
+                setIsPaused(true);
+                clearInterval(timeInterval);
+                handleNewExercise(exerciseData.nextId);
+                handleRefreshCount();
+            }
+        }, 1000);
+    }
+    // timeInterval = setInterval(() => {
+    //     if(!isPaused){
+    //         setCount(counter + 1);
+    //         counter ++;
+    //     }
+    // }, 1000);
     return () => {
         clearInterval(timeInterval);
     }
-  }, [isPaused]);
+  }, [isPaused, exerciseData]);
 
   useEffect(() => {
 
@@ -122,18 +155,18 @@ const ExerciseHook = () => {
     setBarWidth(widthUnity * count);
   }, [count, exerciseData, barWidth]);
 
-  useEffect(() => {
-    const repeatInterval = setTimeout(() => {
-      if(exerciseData.repeatLimit === repeatCount){
-        handleNewExercise(exerciseData.nextId);
-        handleRefreshCount();
-      }
-    }, 1000);
+//   useEffect(() => {
+//     const repeatInterval = setTimeout(() => {
+//       if(exerciseData.repeatLimit === repeatCount){
+//         handleNewExercise(exerciseData.nextId);
+//         handleRefreshCount();
+//       }
+//     }, 1000);
 
-    return () => {
-        clearInterval(repeatInterval);
-    }
-  }, [repeatCount]);
+//     return () => {
+//         clearInterval(repeatInterval);
+//     }
+//   }, [repeatCount]);
 
     useEffect(() => {
         if(id){
@@ -160,7 +193,10 @@ const ExerciseHook = () => {
         setShow,
         handleClose,
         cheat,
-        handleFinishExercises
+        handleFinishExercises,
+        sentence,
+        showSentence,
+        setShowSentence
     }
 };
 
