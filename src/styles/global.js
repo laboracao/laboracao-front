@@ -8,6 +8,7 @@ export default createGlobalStyle`
     padding: 0px;
     box-sizing: border-box;
     font-size: 16px;
+    font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
   }
 
   ::-webkit-scrollbar-track {

@@ -107,9 +107,13 @@ export default function SignUp() {
                 </Grid>
                 <Grid item xs={12} sm={6}>
                     <Box pt={2}>
+                        <div
+                          dangerouslySetInnerHTML={{__html: exerciseData?.descricaoDoExercicio?.html}}
+                        />
+                        {/* {console.log(exerciseData)}
                         <Typography>
                           {exerciseData?.description}
-                        </Typography>
+                        </Typography> */}
                         <br/>
                         <Divider />
                         <TimeBar>
