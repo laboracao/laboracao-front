@@ -15,6 +15,7 @@ const DashboardHook = () => {
     const [showInformation, setShowInformation] = useState(null);
     const [informationContent, setInformationContent] = useState({});
     const [cheatContent, setCheatContent] = useState({});
+    const [informations, setInformations] = useState([]);
 
     const handleAcceptTerm = async () => {
         const data = {term_accept: true};
@@ -40,11 +41,23 @@ const DashboardHook = () => {
         await API.get('/term').then((response) => {
             const {data} = response;
             setTermContent(data.term[0]);
-            setInformationContent(data.information[0]);
+            // setInformationContent(data.information[0]);
         }).catch((e) => {
             console.log(e);
         })
     }
+
+    const handleGetInformation = async (index) => {
+        await API.get(`/information`).then((response) => {
+            const {data} = response;
+            setInformationContent(data.information[index]);
+            // setInformations(data);
+        }).catch((e) => {
+            console.log(e);
+        })
+    };
+
+
 
     const handleGetCheat = async (cheat) => {
         await API.get(`/cheats/${cheat}`).then((response) => {
@@ -104,7 +117,8 @@ const DashboardHook = () => {
         setInformationContent,
         handleGetCheat,
         cheatContent,
-        handleOpenExercise
+        handleOpenExercise,
+        handleGetInformation
     }
 };
 

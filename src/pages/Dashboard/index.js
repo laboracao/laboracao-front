@@ -26,7 +26,8 @@ const Dashboard = () => {
         setShowInformation,
         informationContent,
         cheatContent,
-        handleGetCheat
+        handleGetCheat,
+        handleGetInformation
     } = DashboardHook();
 
     const {
@@ -90,10 +91,34 @@ const Dashboard = () => {
                 />
             </Modal>
 
-            <Modal {...{setShow: setShowCheat, show: showInformation, onClick: () => setShowInformation(false), buttonLabel: "Fechar", modalTitle: informationContent?.titulo, width: 80}}>
-                <div
-                    dangerouslySetInnerHTML={{__html: informationContent?.textoDaInformacao?.html}}
-                />
+            <Modal {...{setShow: setShowCheat, show: showInformation, onClick: () => setShowInformation(false), buttonLabel: "Fechar", modalTitle: "Informações sobre Ginástica Laboral", width: 80}}>
+                
+                <Box width={"100%"} display={"flex"} gridGap={"16px"} pb={"16px"}>
+                    <Button variant="outlined" color="primary" onClick={() => handleGetInformation(0)}>
+                        Benefícios da ginástica laboral
+                    </Button>
+
+                    <Button variant="outlined" color="primary" onClick={() => handleGetInformation(1)}>
+                        Tipos de ginástica laboral
+                    </Button>
+                </Box>
+
+                {informationContent?.textoDaInformacao && (
+                    <Box width={"100%"}>
+                        <Card>
+                            <CardContent>
+                                <Typography component="h2" variant="h6" color="primary" gutterBottom>
+                                    {informationContent?.titulo}
+                                </Typography>
+
+                                <div
+                                    dangerouslySetInnerHTML={{__html: informationContent?.textoDaInformacao?.html}}
+                                />
+                            </CardContent>
+                        </Card>
+                    </Box>
+                )}
+                
             </Modal>
 
             <Modal {...{setShow: setShowCheat, show: showCheat, onClick: () => setShowCheat(false), buttonLabel: "Fechar", modalTitle: 'Dicas', width: 80}}>
