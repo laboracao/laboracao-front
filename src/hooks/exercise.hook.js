@@ -130,6 +130,7 @@ const ExerciseHook = () => {
                 if(exerciseData.nextId === null){
                     handleGetSentence();
                     setShowSentence(true);
+                    handleGetCheat();
                 }
             }
         }, 1000);
