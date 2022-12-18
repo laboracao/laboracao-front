@@ -1,9 +1,11 @@
 import React, {useEffect, useState} from 'react';
+import {useHistory, useParams} from 'react-router-dom';
 import {API} from '../services/api'
 import DashboardHook from './dashboard.hook';
 
 const ExercisesHook = () => {
 
+    const history = useHistory();
     const {_id} = DashboardHook();
     const [value, setValue] = useState('');
     const [quantity, setQuantity] = useState('');
@@ -64,6 +66,34 @@ const ExercisesHook = () => {
         })
     };
 
+    const maxExercises = (select) => {
+        switch(select){
+            case 'neck':
+                return 3;
+            case 'spine':
+                    return 3;
+            case 'hands':
+                return 2;
+            case 'eyes':
+                return 1;
+            case 'legsAndFeet':
+                return 2;
+            case 'arm':
+                return 2;
+            default:
+                return '';
+        }
+    }
+
+    const handleOpenExercise = () => {
+        API.get(`/users/${_id}/exercises`).then((response) => {
+            const {data} = response;
+            history.push(`/exercise/${data[0].id}`);
+        }).catch((e) => {
+            console.log(e)
+        })
+    };
+
     useEffect(() => {
         const {exercises} = generatedExercises;
 
@@ -92,7 +122,9 @@ const ExercisesHook = () => {
         show,
         setShow,
         handleCloseModal,
-        userData
+        userData,
+        maxExercises,
+        handleOpenExercise
     }
 };
 

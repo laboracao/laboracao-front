@@ -61,12 +61,11 @@ export default function SignUp() {
     setShow,
     show,
     handleCloseModal,
-    userData
-  } = ExercisesHook();
-
-  const {
+    userData,
+    value,
+    maxExercises,
     handleOpenExercise
-} = ExerciseHook();
+  } = ExercisesHook();
 
   return (
     <Container component="main" maxWidth="lg">
@@ -113,7 +112,6 @@ export default function SignUp() {
                                         <TextField
                                             variant="outlined"
                                             required
-                                            type={'number'}
                                             fullWidth
                                             id="numeroQtd"
                                             size="small"
@@ -121,6 +119,10 @@ export default function SignUp() {
                                             name="numeroQtd"
                                             value={quantity}
                                             onChange={(e) => setQuantity(e.target.value)}
+                                            inputProps={{
+                                                max: maxExercises(value),
+                                                type: 'number'
+                                            }}
                                         />
                                     </CustomFormWrapper>
                                 </CustomFormWrapper>
@@ -184,7 +186,7 @@ export default function SignUp() {
             </form>
         </div>
 
-        <ExercisesModal {...{userData, setShow, show, handleCloseModal,handleOpenExercise, buttonLabel: "Começar série", modalTitle: "Lista de grupo de exercícios gerados"}}/>
+        <ExercisesModal {...{userData, setShow, show, handleCloseModal, handleOpenExercise, buttonLabel: "Começar série", modalTitle: "Lista de grupo de exercícios gerados"}}/>
 
     </Container>
   );

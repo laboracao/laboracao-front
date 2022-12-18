@@ -22,10 +22,6 @@ const ExerciseHook = () => {
     const [show, setShow] = useState(false);
     const [cheat, setCheat] = useState({});
 
-    const handlePause = (paused) => {
-        setIsPaused(paused);
-    }
-
     const handleClose = () => {
         setShow(false);
     };
@@ -50,13 +46,29 @@ const ExerciseHook = () => {
     }
 
     const handleOpenExercise = () => {
-        API.get(`/users/${_id}/exercises`).then((response) => {
-            const {data} = response;
-            history.push(`/exercise/${data[0].id}`);
-        }).catch((e) => {
-            console.log(e)
-        })
+        return null
     };
+
+    const handleStartCount = () => {
+        timeInterval = setInterval(() => {
+            if(!isPaused){
+                setCount(counter + 1);
+                counter ++;
+            }
+        }, 1000);
+    }
+
+    const handlePause = (paused) => {
+        if(!paused){
+            handleStartCount();
+        }else{
+            clearInterval(timeInterval);
+        }
+    }
+
+    const handleStartExercise = (exercise) => {
+        handleStartCount();
+    }
 
     const handleGetExercises = (id) => {
         API.get(`/users/${_id}/exercises`).then((response) => {
@@ -98,39 +110,16 @@ const ExerciseHook = () => {
     };
 
     useEffect(() => {
-        timeInterval = setInterval(() => {
-            if(!isPaused){
-                setCount(counter + 1);
-                counter ++;
-            }
-        }, 1000);
-        
-        return () => {
-            clearInterval(timeInterval);
-        }
-    }, [isPaused]);
-
-    useEffect(() => {
-
         const widthUnity = 100 / exerciseData.time;
-
+        setBarWidth(widthUnity * count);
         if(count === exerciseData.time){
             setRepeatCount(repeatCounter + 1);
             repeatCounter ++;
             setCount(0);
             counter = 0;
+            handleNewExercise(exerciseData.nextId);
         }
-        setBarWidth(widthUnity * count);
     }, [count, exerciseData, barWidth]);
-
-    useEffect(() => {
-        setTimeout(() => {
-            if(exerciseData.repeatLimit === repeatCount){
-                handleNewExercise(exerciseData.nextId);
-                handleRefreshCount();
-            }
-        }, 1000)
-    }, [repeatCount]);
 
     useEffect(() => {
         if(id){
@@ -139,12 +128,15 @@ const ExerciseHook = () => {
     }, [id]);
 
     useEffect(() => {
+        handleRefreshCount();
+        const timeout = setTimeout(() => {
+            handleStartExercise(exerciseData)
+        }, 15000)
         return () => {
-            counter = 0;
-            repeatCounter = 0;
+            clearInterval(timeout);
             clearInterval(timeInterval);
         }
-    }, []);
+    }, [exerciseData])
 
     return {
         handleOpenExercise,

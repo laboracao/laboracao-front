@@ -16,7 +16,7 @@ import PauseIcon from '@material-ui/icons/Pause';
 
 import Modal from '../../components/modal.component';
 
-import ExerciseHook from '../../hooks/exercise.hook';
+import ExerciseHook from '../../hooks/exercise.hook.v2';
 
 const CustomRadioGroup = styled(RadioGroup)`
     flex-direction: row;
