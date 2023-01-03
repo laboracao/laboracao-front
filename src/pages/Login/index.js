@@ -44,7 +44,7 @@ export default function SignIn() {
           <LockOutlinedIcon />
         </Avatar>
         <Typography component="h1" variant="h5">
-          BETO
+          BETOOOS
         </Typography>
         <Typography component="p" variant="p">
           <b>B</b>em <b>E</b>star no <b>T</b>rabalh<b>O</b>
