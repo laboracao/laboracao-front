@@ -13,7 +13,7 @@ import RadioGroup from '@material-ui/core/RadioGroup';
 import FormControl from '@material-ui/core/FormControl';
 import FormLabel from '@material-ui/core/FormLabel';
 import styled from 'styled-components';
-import { Divider } from '@material-ui/core';
+import { Divider, Tooltip } from '@material-ui/core';
 
 import SettingsHook from '../../hooks/settings.hook';
 import { min } from 'moment';
@@ -78,7 +78,10 @@ export default function SignUp() {
   return (
     <Container component="main" maxWidth="lg">
         <Typography component="h2" variant="h4" color="primary" gutterBottom>
-        CONFIGURAÇÕES DO USUÁRIO
+            CONFIGURAÇÕES DO USUÁRIO
+        </Typography>
+        <Typography variant="h6">
+            Para receber as notificações, é necessário ativar as notificações no navegador e no seu sistema operacional.
         </Typography>
         <div className={classes.paper}>
             <form className={classes.form} onSubmit={(e) => handleSubmit(e)}>
@@ -106,9 +109,11 @@ export default function SignUp() {
                     </Grid>
                     <Grid item xs={12} sm={12}>
                         <CustomFormWrapper>
-                            <Typography variant='h6'>
-                                GL Preparatória (antes do expediente):
-                            </Typography>
+                            <Tooltip arrow title="Tem como objetivo preparar os funcionários para atividades de agilidade, força ou resistência.">
+                                <Typography variant='h6'>
+                                    GL Preparatória (antes do expediente):
+                                </Typography>
+                            </Tooltip>
                             <CustomFormWrapper>
                                 <TextField
                                     variant="outlined"
@@ -145,9 +150,11 @@ export default function SignUp() {
                     
                     <Grid item xs={12} sm={12}>
                         <CustomFormWrapper>
-                            <Typography variant='h6'>
-                                GL Compensatória (durante o expediente):
-                            </Typography>
+                            <Tooltip arrow title="Tem como objetivo amenizar as tensões, fortalecer as musculaturas, além de prevenir os vícios de postura.">
+                                <Typography variant='h6'>
+                                    GL Compensatória (durante o expediente):
+                                </Typography>
+                            </Tooltip>  
                             <CustomFormWrapper>
                                 <TextField
                                     variant="outlined"
@@ -186,9 +193,11 @@ export default function SignUp() {
 
                     <Grid item xs={12} sm={12}>
                         <CustomFormWrapper>
-                            <Typography variant='h6'>
-                                GL Relaxamento (após o expediente):
-                            </Typography>
+                            <Tooltip arrow title="Tem como objetivo promover o alongamento da musculatura.">
+                                <Typography variant='h6'>
+                                    GL Relaxamento (após o expediente):
+                                </Typography>
+                            </Tooltip>
                             <CustomFormWrapper>
                                 <TextField
                                     variant="outlined"

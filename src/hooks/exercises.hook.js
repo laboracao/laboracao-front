@@ -58,10 +58,10 @@ const ExercisesHook = () => {
         // });
 
         const data = {
-            arm: "3",
-            eyes: "3",
-            hands: "4",
-            legsAndFeet: "4",
+            arm: "2",
+            eyes: "1",
+            hands: "2",
+            legsAndFeet: "2",
             neck: "3",
             spine: "3"
         }

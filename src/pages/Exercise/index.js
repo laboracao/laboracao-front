@@ -17,7 +17,7 @@ import PauseIcon from '@material-ui/icons/Pause';
 import Modal from '../../components/modal.component';
 import SentenceModal from '../../components/sentenceModal.component';
 
-import ExerciseHook from '../../hooks/exercise.hook';
+import ExerciseHook from '../../hooks/exercise.hook.v2';
 
 const CustomRadioGroup = styled(RadioGroup)`
     flex-direction: row;
@@ -84,7 +84,8 @@ export default function SignUp() {
     handleFinishExercises,
     sentence,
     showSentence,
-    setShowSentence
+    setShowSentence,
+    isPaused
   } = ExerciseHook();
 
   return (
@@ -128,12 +129,18 @@ export default function SignUp() {
                             {/* <Button variant="contained" size='medium' color="secondary">
                               <StopIcon />
                             </Button> */}
-                            <Button variant="contained" size='medium' color="primary" onClick={() => handlePause(false)}>
-                              <PlayArrowIcon />
-                            </Button>
-                            <Button variant="contained" size='medium' color="secondary" onClick={() => handlePause(true)}>
-                              <PauseIcon />
-                            </Button>
+                            {isPaused && (
+                              <Button variant="contained" size='medium' color="primary" onClick={() => handlePause(false)}>
+                                <PlayArrowIcon />
+                              </Button>
+                            )}
+
+                            {!isPaused && (
+                              <Button variant="contained" size='medium' color="secondary" onClick={() => handlePause(true)}>
+                                <PauseIcon />
+                              </Button>
+                            )}
+                            
                             {exerciseData.nextId && (
                               <Button variant="contained" size='medium' color="default" onClick={() => handleNewExercise(exerciseData.nextId)}>
                                 <SkipNextIcon />
