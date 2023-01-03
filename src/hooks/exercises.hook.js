@@ -52,12 +52,12 @@ const ExercisesHook = () => {
 
     const handleGenerateExercise = () =>{
         const data = {
-            // arm: "2",
+            arm: "2",
             eyes: "1",
-            // hands: "2",
-            // legsAndFeet: "2",
-            // neck: "3",
-            // spine: "3"
+            hands: "2",
+            legsAndFeet: "2",
+            neck: "3",
+            spine: "3"
         }
 
         API.post(`/users/${_id}/generate-exercises`, data).then((response) => {
