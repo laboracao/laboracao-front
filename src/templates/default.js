@@ -12,7 +12,7 @@ import { HeaderStyle } from '../styles/header';
 
 import Header from '../components/header.component';
 
-import {getPushNotification, removePushNotification} from '../services/api';
+import {getPushNotification, removePushNotification, getPush} from '../services/api';
 
 
 const MobileGrid = styled(Grid)`
@@ -59,6 +59,10 @@ export default function PersistentDrawerLeft({ children }) {
         return 'dom'
     }
   }
+
+  useEffect(() => {
+    getPush();
+  }, [])
 
   useEffect(() => {
 

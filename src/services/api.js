@@ -109,6 +109,12 @@ const handleNotification = (message) => {
   Push.create(message)
 };
 
+const getPush = async () => {
+  if(await Push.Permission.get() === 'default' || await Push.Permission.get() === 'denied'){
+    await Push.Permission.request()
+  }
+}
+
 let waterNotification = false;
 let glEndNotification = false;
 let glStartNotification = false;
@@ -230,5 +236,6 @@ export {
   setUserDataInStorage,
   getUserDataInStorage,
   getPushNotification,
-  removePushNotification
+  removePushNotification,
+  getPush
 };
