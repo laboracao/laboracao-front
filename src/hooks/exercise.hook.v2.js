@@ -131,7 +131,7 @@ const ExerciseHook = () => {
         handleRefreshCount();
         const timeout = setTimeout(() => {
             handleStartExercise(exerciseData)
-        }, 15000)
+        }, 8000)
         return () => {
             clearInterval(timeout);
             clearInterval(timeInterval);
