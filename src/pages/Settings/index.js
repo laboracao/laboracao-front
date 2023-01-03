@@ -13,8 +13,8 @@ import RadioGroup from '@material-ui/core/RadioGroup';
 import FormControl from '@material-ui/core/FormControl';
 import FormLabel from '@material-ui/core/FormLabel';
 import styled from 'styled-components';
-import { Divider, Tooltip } from '@material-ui/core';
-
+import { Divider, Tooltip} from '@material-ui/core';
+import { Alert } from '@material-ui/lab';
 import SettingsHook from '../../hooks/settings.hook';
 import { min } from 'moment';
 
@@ -80,10 +80,9 @@ export default function SignUp() {
         <Typography component="h2" variant="h4" color="primary" gutterBottom>
             CONFIGURAÇÕES DO USUÁRIO
         </Typography>
-        <Typography variant="h6">
-            Para receber as notificações, é necessário se manter logado no sistema, manter a aba aberta em seu navegador
-            e ativar as notificações no navegador e no seu sistema operacional.
-        </Typography>
+        <Alert severity="info">
+            Para receber as notificações, é necessário se manter logado(a) no sistema, manter a aba aberta, ativar as notificações no navegador e no sistema operacional.
+        </Alert>
         <div className={classes.paper}>
             <form className={classes.form} onSubmit={(e) => handleSubmit(e)}>
                 <Grid container spacing={2}>
@@ -95,8 +94,6 @@ export default function SignUp() {
                                 name="diaSemana"
                                 value={value}
                                 onChange={handleChange}
-                                // onChange={handleFormChange}
-                                // value={'' || formValues.diaSemana}
                             >
                                 <FormControlLabel value="dom" control={<Radio />} label="Dom" />
                                 <FormControlLabel value="seg" control={<Radio />} label="Seg" />

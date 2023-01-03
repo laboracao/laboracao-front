@@ -111,10 +111,6 @@ export default function SignUp() {
                         <div
                           dangerouslySetInnerHTML={{__html: exerciseData?.descricaoDoExercicio?.html}}
                         />
-                        {/* {console.log(exerciseData)}
-                        <Typography>
-                          {exerciseData?.description}
-                        </Typography> */}
                         <br/>
                         <Divider />
                         <TimeBar>
