@@ -63,13 +63,6 @@ function App() {
     Push.create("teste")
   };
 
-  // useEffect(() => {
-  //   getPushNotification()
-  //   return () => {
-  //     removePushNotification()
-  //   }
-  // }, [])
-
   return (
     <DefaultContext.Provider value={defaultContext}>
       <LoadingComponent {...{loading}} />
