@@ -33,7 +33,7 @@ const InterceptorHooks = () => {
 }
 
 const API = axios.create({
-  baseURL: 'http://localhost:8081',
+  baseURL: 'https://laboracao-back.vercel.app/',
   // baseURL: 'https://laboracao-back.herokuapp.com/',
   headers: {
     'Authorization': sessionStorage.getItem("token"),
