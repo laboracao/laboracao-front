@@ -21,6 +21,8 @@ const ExerciseHook = () => {
     const [isPaused, setIsPaused] = useState(false);
     const [show, setShow] = useState(false);
     const [cheat, setCheat] = useState({});
+    const [showSentence, setShowSentence] = useState(false);
+    const [sentence, setSentence] = useState({});
 
     const handleClose = () => {
         setShow(false);
@@ -96,6 +98,15 @@ const ExerciseHook = () => {
         repeatCounter = 0;
     };
 
+    const handleGetSentence = () => {
+        API.get(`/sentences`).then((response) => {
+            const {data} = response;
+            setSentence(data);
+        }).catch((e) => {
+            console.log(e)
+        })
+    }
+
     const handleNewExercise = (id) => {
         handleRefreshCount();
         if(id){
@@ -106,8 +117,10 @@ const ExerciseHook = () => {
             setShow(true);
             handleRefreshCount();
             clearInterval(timeInterval);
+            handleGetSentence();
         }
     };
+    
 
     useEffect(() => {
         const widthUnity = 100 / exerciseData.time;
@@ -158,7 +171,10 @@ const ExerciseHook = () => {
         handleClose,
         cheat,
         handleFinishExercises,
-        isPaused
+        isPaused,
+        showSentence,
+        setShowSentence,
+        sentence,
     }
 };
 

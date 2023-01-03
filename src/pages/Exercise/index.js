@@ -152,7 +152,7 @@ export default function SignUp() {
             </Grid>
         </div>
 
-        <SentenceModal {...{setShow: setShowSentence, show: showSentence, onClick: () => setShow(true), buttonLabel: "Ver dica", modalTitle: "Fim da série"}}>
+        <SentenceModal {...{setShow, show, onClick: () => setShowSentence(true), buttonLabel: "Ver dica", modalTitle: "Frase motivacional"}}>
           <Box width={"100%"}>
             <Card>
               <CardContent>
@@ -165,7 +165,7 @@ export default function SignUp() {
           </Box>
         </SentenceModal>
 
-        <Modal {...{setShow, show, onClick: handleFinishExercises, buttonLabel: "Ok, finalizar série", modalTitle: "Fim da série"}}>
+        <Modal {...{setShow: showSentence, show: showSentence, onClick: handleFinishExercises, buttonLabel: "Ok, finalizar série", modalTitle: "Fim da série"}}>
           <Box width={"100%"}>
             <Card>
               <CardContent>

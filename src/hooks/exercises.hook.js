@@ -51,19 +51,13 @@ const ExercisesHook = () => {
     };
 
     const handleGenerateExercise = () =>{
-        // let data = {};
-
-        // exerciseList.map((item) => {
-        //     data[item.exercise] = item.quantity
-        // });
-
         const data = {
-            arm: "2",
+            // arm: "2",
             eyes: "1",
-            hands: "2",
-            legsAndFeet: "2",
-            neck: "3",
-            spine: "3"
+            // hands: "2",
+            // legsAndFeet: "2",
+            // neck: "3",
+            // spine: "3"
         }
 
         API.post(`/users/${_id}/generate-exercises`, data).then((response) => {
@@ -73,21 +67,6 @@ const ExercisesHook = () => {
             console.log(e)
         })
     };
-
-    // useEffect(() => {
-        // const {exercises} = generatedExercises;
-
-        // setShowExercisesModal(true);
-
-        // if(exercises?.length > 0){
-        //     API.put(`/users/edit/${_id}`, {exercises: exercises}).then((response) => {
-        //         setShowExercisesModal(true);
-        //         setUserData(response.data);
-        //     }).catch((e) => {
-        //         console.log(e);
-        //     });
-        // }
-    // }, [generatedExercises])
 
     return {
         value,
