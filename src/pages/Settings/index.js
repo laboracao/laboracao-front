@@ -81,7 +81,8 @@ export default function SignUp() {
             CONFIGURAÇÕES DO USUÁRIO
         </Typography>
         <Typography variant="h6">
-            Para receber as notificações, é necessário ativar as notificações no navegador e no seu sistema operacional.
+            Para receber as notificações, é necessário se manter logado no sistema, manter a aba aberta em seu navegador
+            e ativar as notificações no navegador e no seu sistema operacional.
         </Typography>
         <div className={classes.paper}>
             <form className={classes.form} onSubmit={(e) => handleSubmit(e)}>
@@ -109,7 +110,7 @@ export default function SignUp() {
                     </Grid>
                     <Grid item xs={12} sm={12}>
                         <CustomFormWrapper>
-                            <Tooltip arrow title="Tem como objetivo preparar os funcionários para atividades de agilidade, força ou resistência.">
+                            <Tooltip arrow title={<Typography>Tem como objetivo preparar os funcionários para atividades de agilidade, força ou resistência.</Typography>}>
                                 <Typography variant='h6'>
                                     GL Preparatória (antes do expediente):
                                 </Typography>
@@ -150,7 +151,7 @@ export default function SignUp() {
                     
                     <Grid item xs={12} sm={12}>
                         <CustomFormWrapper>
-                            <Tooltip arrow title="Tem como objetivo amenizar as tensões, fortalecer as musculaturas, além de prevenir os vícios de postura.">
+                            <Tooltip arrow title={<Typography>Tem como objetivo amenizar as tensões, fortalecer as musculaturas, além de prevenir os vícios de postura.</Typography>}>
                                 <Typography variant='h6'>
                                     GL Compensatória (durante o expediente):
                                 </Typography>
@@ -193,7 +194,7 @@ export default function SignUp() {
 
                     <Grid item xs={12} sm={12}>
                         <CustomFormWrapper>
-                            <Tooltip arrow title="Tem como objetivo promover o alongamento da musculatura.">
+                            <Tooltip arrow title={<Typography>Tem como objetivo promover o alongamento da musculatura</Typography>}>
                                 <Typography variant='h6'>
                                     GL Relaxamento (após o expediente):
                                 </Typography>

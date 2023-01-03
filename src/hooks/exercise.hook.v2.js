@@ -139,7 +139,6 @@ const ExerciseHook = () => {
     }, [exerciseData]);
 
     useEffect(() => {
-        // console.log(isPaused);
         if(!isPaused){
             handleStartCount();
         }else{
