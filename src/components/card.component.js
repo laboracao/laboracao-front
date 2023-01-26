@@ -65,7 +65,7 @@ const CardComponent = ({title, bg, ajust, action, ajustDesktop, children}) => {
 
     const img = bg === 1 ? img1 : bg === 2 ? img2 : bg === 3 ? img3 : img4;
 
-    const background = bg === 1 ? "#DA3941" : bg === 2 ? '#E2572F' : bg === 3 ? "#E9751D" : "#1B2138"  
+    const background = bg === 1 ? "#DA3941" : bg === 2 ? '#E2572F' : bg === 3 ? "#E9751D" : "#4c993f"  
 
     return (
         <CustomCard bg={img} background={background} onClick={action && action}>
