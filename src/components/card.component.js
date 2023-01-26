@@ -17,6 +17,7 @@ const CustomCard = styled(Card)`
     align-items: center;
     padding: 16px;
     cursor: pointer;
+    background: ${props => props.background}
 `;
 
 const CardContent = styled('div')`
@@ -64,8 +65,10 @@ const CardComponent = ({title, bg, ajust, action, ajustDesktop, children}) => {
 
     const img = bg === 1 ? img1 : bg === 2 ? img2 : bg === 3 ? img3 : img4;
 
+    const background = bg === 1 ? "#DA3941" : bg === 2 ? '#E2572F' : bg === 3 ? "#E9751D" : "#1B2138"  
+
     return (
-        <CustomCard bg={img} onClick={action && action}>
+        <CustomCard bg={img} background={background} onClick={action && action}>
             <Box width="100%">
                 <CardTitle>
                     {title}
@@ -74,7 +77,7 @@ const CardComponent = ({title, bg, ajust, action, ajustDesktop, children}) => {
                     {children}
                 </CardContent>
             </Box>
-            <Bg {...{img, ajust, ajustDesktop}}/>
+            {/* <Bg {...{img, ajust, ajustDesktop}}/> */}
         </CustomCard>
     )
 };
