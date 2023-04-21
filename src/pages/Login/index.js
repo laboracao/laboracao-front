@@ -46,8 +46,8 @@ export default function SignIn() {
 
   return (
     <div style={{display: 'flex', height: '100vh'}}>
-      <div style={{display: isMobile && 'none', width: '33%', height: '100%', background: `url(${BG1})center top`, backgroundSize: 'cover'}}></div>
-      <div style={{width: isMobile ? '100%' : '34%', padding: '0px 24px'}}>
+      <div style={{width: isMobile ? '2%' : '33%', height: '100%', background: `url(${BG1}) ${isMobile ? 'left': 'center'} top`, backgroundSize: 'cover'}}></div>
+      <div style={{width: isMobile ? '96%' : '34%', padding: '0px 24px'}}>
         <div style={{height: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center'}}>
           <div style={{display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
             <img src={Logo} />
@@ -91,7 +91,7 @@ export default function SignIn() {
           </form>
         </div>
       </div>
-      <div style={{display: isMobile && 'none', width: '33%', height: '100%', background: `url(${BG2})`, backgroundSize: 'cover'}}></div>
+      <div style={{width: isMobile ? '2%' : '33%', height: '100%', background: `url(${BG2})`, backgroundSize: 'cover'}}></div>
     </div>
   );
 }
