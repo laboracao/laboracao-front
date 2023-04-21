@@ -62,9 +62,9 @@ export default function SignIn() {
                 required
                 fullWidth
                 id="email"
-                label="Seu email"
                 name="email"
                 type="email"
+                placeholder="Seu email"
                 autoComplete="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
