@@ -24,7 +24,6 @@ export default createGlobalStyle`
   }
 
   html{
-    height: 100vh;
     body, #root{
       min-height: 100vh;
     }

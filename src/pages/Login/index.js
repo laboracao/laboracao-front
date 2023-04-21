@@ -1,16 +1,18 @@
-import React, { useState } from 'react';
+import React, {useContext} from 'react';
+import DefaultContext from '../../stores/defaultContext';
+
 import { makeStyles } from '@material-ui/core/styles';
 
-import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
-import Container from '@material-ui/core/Container';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import TextField from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography';
-import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
+
+import Input from '../../components/input.component';
+
+import BG1 from '../../assets/bg1.png';
+import BG2 from '../../assets/bg2.png';
+import Logo from '../../assets/logo.png';
 
 import LoginHook from '../../hooks/login.hook';
-
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -29,52 +31,67 @@ const useStyles = makeStyles((theme) => ({
   },
   submit: {
     margin: theme.spacing(2, 0, 2),
+    color: '#fff',
+    borderRadius: '10px'
   },
+  input: {
+    borderRadius: '10px'
+  }
 }));
 
 export default function SignIn() {
   const classes = useStyles();
+  const {isMobile} = useContext(DefaultContext);
   const {email, setEmail, handleSubmit} = LoginHook();
 
   return (
-    <Container component="main" maxWidth="xs">
-      <CssBaseline />
-      <form className={classes.paper} onSubmit={(e) => handleSubmit(e)}>
-        <Avatar className={classes.avatar}>
-          <LockOutlinedIcon />
-        </Avatar>
-        <Typography component="h1" variant="h5">
-          BETO
-        </Typography>
-        <Typography component="p" variant="p">
-          <b>B</b>em <b>E</b>star no <b>T</b>rabalh<b>O</b>
-        </Typography>
-        <div className={classes.form}>
-          <TextField
-            variant="outlined"
-            required
-            fullWidth
-            id="email"
-            label="E-mail"
-            name="email"
-            type="email"
-            autoComplete="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            autoFocus
-          />
-          <Button
-            fullWidth
-            variant="contained"
-            color="primary"
-            className={classes.submit}
-            type="submit"
-            id="loginButton"
-          >
-            Entrar
-          </Button>
+    <div style={{display: 'flex', height: '100vh'}}>
+      <div style={{display: isMobile && 'none', width: '33%', height: '100%', background: `url(${BG1})center top`, backgroundSize: 'cover'}}></div>
+      <div style={{width: isMobile ? '100%' : '34%', padding: '0px 24px'}}>
+        <div style={{height: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center'}}>
+          <div style={{display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
+            <img src={Logo} />
+            <Typography variant="h4">
+              Bem Estar no TrabalhO
+            </Typography>
+          </div>
+          <form onSubmit={(e) => handleSubmit(e)}>
+            <div className={classes.form}>
+              <Input
+                variant="outlined"
+                required
+                fullWidth
+                id="email"
+                label="Seu email"
+                name="email"
+                type="email"
+                autoComplete="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                autoFocus
+                className={classes.input}
+                inputProps={{
+                  classes: {
+                    root: classes.input
+                  }
+                }}
+              />
+
+              <Button
+                fullWidth
+                variant="contained"
+                color="primary"
+                className={classes.submit}
+                type="submit"
+                id="loginButton"
+              >
+                Entrar
+              </Button>
+            </div>
+          </form>
         </div>
-      </form>
-    </Container>
+      </div>
+      <div style={{display: isMobile && 'none', width: '33%', height: '100%', background: `url(${BG2})`, backgroundSize: 'cover'}}></div>
+    </div>
   );
 }
