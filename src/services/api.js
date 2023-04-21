@@ -66,20 +66,12 @@ const LoadingComponent = ({loading}) => {
   })
 
   return loading && (
-    // <LoadingWrapper>
-    //   <LinearProgress color="primary"></LinearProgress>
-    // </LoadingWrapper>
     <LoadingWrapper>
-      <LinearProgress color="primary"/>
+      <LinearProgress color="secondary"/>
     </LoadingWrapper>
   )
   
 }
-
-// API.interceptors.response.use(function(config){
-//   console.log("response");
-//   return config;
-// })
 
 const setTokenInStorage = (token) => {
   localStorage.setItem("token", token);
