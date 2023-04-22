@@ -5,6 +5,7 @@ import { getTokenInStorage, decodeToken } from './services/api'
 
 import Dashboard from './pages/Dashboard'
 import Settings from './pages/Settings'
+import SettingsV2 from './pages/SettingsV2'
 import Exercises from './pages/Exercises'
 import Exercise from './pages/Exercise'
 import Login from './pages/Login'
@@ -53,7 +54,8 @@ function AllRoutes() {
     <Switch>
       <Route path="/" exact component={Login} />
       <PrivateRoute path="/dashboard" exact component={Dashboard} />
-      <PrivateRoute path="/settings" exact component={Settings} />
+      <PrivateRoute path="/settings" exact component={SettingsV2} />
+      {/* <PrivateRoute path="/settingsV2" exact component={SettingsV2} /> */}
       <PrivateRoute path="/exercises" exact component={Exercises} />
       <PrivateRoute path="/exercise/:id" exact component={Exercise} />
       <Route path="*" component={() => <h1> 404 </h1>} />

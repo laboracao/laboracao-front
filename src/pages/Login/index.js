@@ -3,7 +3,7 @@ import DefaultContext from '../../stores/defaultContext';
 
 import { makeStyles } from '@material-ui/core/styles';
 
-import Button from '@material-ui/core/Button';
+import ButtonComponent from '../../components/button.component';
 import Typography from '@material-ui/core/Typography';
 
 import Input from '../../components/input.component';
@@ -55,8 +55,8 @@ export default function SignIn() {
               Bem Estar no TrabalhO
             </Typography>
           </div>
-          <form onSubmit={(e) => handleSubmit(e)}>
-            <div className={classes.form}>
+          <form onSubmit={(e) => handleSubmit(e)} style={{width: '100%'}}>
+            <div className={classes.form} style={{display: 'flex', flexDirection: 'column', gap: '16px', width: '100%'}}>
               <Input
                 variant="outlined"
                 required
@@ -77,16 +77,17 @@ export default function SignIn() {
                 }}
               />
 
-              <Button
+              <ButtonComponent
                 fullWidth
                 variant="contained"
                 color="primary"
-                className={classes.submit}
                 type="submit"
                 id="loginButton"
-              >
-                Entrar
-              </Button>
+                label="Sair"
+                size="small"
+                format="input"
+              />
+
             </div>
           </form>
         </div>

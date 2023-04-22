@@ -1,39 +1,12 @@
-import React, { useState, useEffect } from 'react';
-import {
-  Box,
-  Card,
-  CardContent, Grid, Typography,
-  Button
-} from '@material-ui/core';
-import clsx from 'clsx';
-import styled from 'styled-components';
-
-import { HeaderStyle } from '../styles/header';
-
-import Header from '../components/header.component';
-
+import React, { useEffect } from 'react';
+import LOGO2 from '../assets/logo2.png'
+import HeaderV2 from '../components/header.v2.component';
+import Menu from '../components/menu.component';
 import {getPushNotification, removePushNotification, getPush} from '../services/api';
+import { COLORS } from '../styles/colors';
 
-
-const MobileGrid = styled(Grid)`
-  @media(max-width: 980px){
-    width: 100%;
-    position: fixed;
-    z-index: 1000;
-  }
-`;
 
 export default function PersistentDrawerLeft({ children }) {
-  const classes = HeaderStyle();
-  const [open, setOpen] = useState(false);
-
-  const handleDrawerOpen = () => {
-    setOpen(true);
-  };
-
-  const handleDrawerClose = () => {
-    setOpen(false);
-  };
 
   const handleConvertDay = () => {
     const currentDate = new Date();
@@ -74,30 +47,18 @@ export default function PersistentDrawerLeft({ children }) {
 
   return (
     <>
-      <div style={{ minHeight: '100vh' }}>
-        <div className={`${classes.root} main-background`}>
-          <Header
-            open={open}
-            handleDrawerOpen={handleDrawerOpen}
-            handleDrawerClose={handleDrawerClose}
-          />
-          <main
-            className={`${clsx(classes.content, {
-              [classes.contentShift]: open,
-            })} main-background`}
-            style={{ minHeight: '100vh' }}
-          >
-            <div>
-              <div className={classes.drawerHeader} />
-              <Grid container>
-                <Grid item lg={12} xs={12}>
-                  <div className={classes.drawerWrapper}>
-                    {children}
-                  </div>
-                </Grid>
-              </Grid>
-            </div>
-          </main>
+      <div style={{display: 'flex' }}>
+        <div style={{display: 'flex', flexDirection: 'column', padding: ' 16px'}}>
+          <div >
+            <img src={LOGO2} style={{width: '45px'}} />
+          </div>
+          <div style={{height: '80%', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center'}}>
+            <Menu />
+          </div>
+        </div>
+        <div style={{ width: '100%',padding: '0px 0px 0px 24px', background: COLORS.light1, overflowY: 'auto', height: '100vh', maxHeight: '100vh', overflowX: 'hidden'}}>
+          <HeaderV2 />
+          {children}
         </div>
       </div>
     </>

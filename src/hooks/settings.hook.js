@@ -31,6 +31,10 @@ const SettingsHook = () => {
       setValue(event.target.value);
     };
 
+    const handleChangeV2 = (value) => {
+        setValue(value);
+    };
+
     const handleFormChange = (event) => {
         setFormValues({
             ...formValues,
@@ -157,7 +161,8 @@ const SettingsHook = () => {
         handleSubmit,
         handleChange,
         formValues,
-        handleFormChange
+        handleFormChange,
+        handleChangeV2
     }
 }
 
