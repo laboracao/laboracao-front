@@ -1,9 +1,7 @@
-import React, {useState, useEffect, useContext} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
-import CircularProgress from '@material-ui/core/CircularProgress';
-import { makeStyles } from '@material-ui/core/styles';
-import RadioGroup from '@material-ui/core/RadioGroup';
+
 import styled from 'styled-components';
 import { Box, CardContent, Card } from '@material-ui/core';
 import {COLORS} from '../../styles/colors';
@@ -22,16 +20,8 @@ import SentenceModal from '../../components/sentenceModal.component';
 
 import ExerciseHook from '../../hooks/exercise.hook.v2';
 
-const CustomRadioGroup = styled(RadioGroup)`
-    flex-direction: row;
-`;
+import NotifyAudio from '../../assets/notification.ogg'
 
-const CustomFormWrapper = styled('div')`
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    margin-top: 8px;
-`;
 
 const TimeBar = styled('div')`
   width: 100%;
@@ -50,34 +40,7 @@ const TimeBarWrapper = styled('div')`
   border-radius: 20px;
 `
 
-const useStyles = makeStyles((theme) => ({
-  paper: {
-    marginTop: theme.spacing(0),
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-  },
-  avatar: {
-    margin: theme.spacing(1),
-    backgroundColor: theme.palette.secondary.main,
-  },
-  form: {
-    width: '100%', // Fix IE 11 issue.
-    marginTop: theme.spacing(3),
-  },
-  submit: {
-    margin: theme.spacing(3, 0, 2),
-  },
-  root: {
-    width: '100%',
-    justifyContent: 'space-between',
-    display: 'flex',
-    paddingTop: theme.spacing(3)
-  },
-}));
-
 export default function SignUp() {
-  const classes = useStyles();
 
   const {isMobile} = useContext(DefaultContext);
 
@@ -94,9 +57,8 @@ export default function SignUp() {
     showSentence,
     setShowSentence,
     isPaused,
-    startCount
+    play
   } = ExerciseHook();
-
 
   return (
     <div style={{display: 'flex', flexDirection: isMobile ? 'column' : 'row', gap: isMobile ? 24 : 0}}>
@@ -108,6 +70,10 @@ export default function SignUp() {
           <Typography variant="body1">
             {exerciseData?.time} segundos || Repetições: {exerciseData?.repeatLimit}
           </Typography>
+
+          {play && (
+            <audio src={NotifyAudio} autoPlay controls />
+          )}
 
           <Grid container spacing={2}>
             <Grid item xs={12} sm={12}>

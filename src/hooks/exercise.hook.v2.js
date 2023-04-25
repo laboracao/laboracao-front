@@ -12,6 +12,7 @@ const ExerciseHook = () => {
     const {_id} = DashboardHook();
     const {id} = useParams();
     const history = useHistory();
+
     const [exerciseData, setExerciseData] = useState({});
     const [allExercises, setAllExercises] = useState([]);
     const [barWidth, setBarWidth] = useState(0);
@@ -22,6 +23,7 @@ const ExerciseHook = () => {
     const [cheat, setCheat] = useState({});
     const [showSentence, setShowSentence] = useState(false);
     const [sentence, setSentence] = useState({});
+    const [play, setPlay] = useState(false);
 
     const handleClose = () => {
         setShow(false);
@@ -73,8 +75,8 @@ const ExerciseHook = () => {
 
     const handleGetExercises = (id) => {
         API.get(`/users/${_id}/exercises`).then((response) => {
-            const {data} = response;
 
+            const {data} = response;
             const searchedExercise = data.find((item, index) => {
                 if(item.id === id){
                     item.index = index;
@@ -87,12 +89,15 @@ const ExerciseHook = () => {
             setAllExercises(data);
         }).catch((e) => {
             console.log(e)
+        }).finally(() => {
+            setPlay(true);
         })
     };
 
     const handleRefreshCount = () => {
         setCount(0);
         setRepeatCount(0);
+        setPlay(false);
         counter = 0;
         repeatCounter = 0;
     };
@@ -139,10 +144,11 @@ const ExerciseHook = () => {
         }
     }, [id]);
 
+    console.log(id);
     useEffect(() => {
         handleRefreshCount();
         const timeout = setTimeout(() => {
-            handleStartExercise(exerciseData)
+            handleStartExercise(exerciseData);
         }, 8000)
         return () => {
             clearInterval(timeout);
@@ -156,7 +162,8 @@ const ExerciseHook = () => {
         }else{
             clearInterval(timeInterval);
         }
-    }, [isPaused])
+    }, [isPaused]);
+
 
     return {
         handleOpenExercise,
@@ -174,6 +181,7 @@ const ExerciseHook = () => {
         showSentence,
         setShowSentence,
         sentence,
+        play, setPlay
     }
 };
 
