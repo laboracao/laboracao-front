@@ -1,6 +1,5 @@
-import React, {useEffect, useState} from 'react';
+import {useEffect, useState} from 'react';
 import {useHistory, useParams} from 'react-router-dom';
-import Dashboard from '../pages/Dashboard';
 import {API} from '../services/api'
 import DashboardHook from './dashboard.hook';
 

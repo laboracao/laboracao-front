@@ -1,21 +1,11 @@
-// const primary = "#DA397D" 
-// const secondary = "#39A0DA"
-// const danger = "#E35C5C"
-// const warning = "rgba(248, 148, 6, 0.9)"
-// const success = "#39DA79"
-// const info = "#8137f7e6"
-// const dark1 = "#37303c"
-// const dark0 = "#26212a"
-// const light0 = "#ffffff"
-// const light1 = "#f6f6f6"
-// const gray0 = "#666666"
-
 const primary = "#F0A042" 
 const secondary = "#F0428B"
 const danger = "#E35C5C"
 const warning = "#fcff3a"
 const success = "#42F049"
+const successHover = "#34bf39"
 const info = "#42D1F0"
+const infoHover = "#36aac3"
 const dark1 = "#1b2138"
 const dark0 = "#111422"
 const light0 = "#ffffff"
@@ -30,7 +20,9 @@ export const COLORS = {
     danger,
     warning,
     success,
+    successHover,
     info,
+    infoHover,
     dark1,
     dark0,
     light0,

@@ -1,15 +1,18 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useContext} from 'react';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
+import CircularProgress from '@material-ui/core/CircularProgress';
 import { makeStyles } from '@material-ui/core/styles';
-import Container from '@material-ui/core/Container';
 import RadioGroup from '@material-ui/core/RadioGroup';
 import styled from 'styled-components';
-import { Divider, Box, Button, CardContent, Card } from '@material-ui/core';
+import { Box, CardContent, Card } from '@material-ui/core';
 import {COLORS} from '../../styles/colors';
 
+import ButtonComponent from '../../components/button.component';
+
+import DefaultContext from '../../stores/defaultContext';
+
 import PlayArrowIcon from '@material-ui/icons/PlayArrow';
-import StopIcon from '@material-ui/icons/Stop';
 import SkipNextIcon from '@material-ui/icons/SkipNext';
 import SkipPreviousIcon from '@material-ui/icons/SkipPrevious';
 import PauseIcon from '@material-ui/icons/Pause';
@@ -33,7 +36,10 @@ const CustomFormWrapper = styled('div')`
 const TimeBar = styled('div')`
   width: 100%;
   height: 20px;
-  background: #ccc;
+  background: ${COLORS.secondary};
+  border-radius: 20px;
+  overflow: hidden;
+  padding: 4px;
 `
 
 const TimeBarWrapper = styled('div')`
@@ -41,6 +47,7 @@ const TimeBarWrapper = styled('div')`
   background: ${COLORS.primary};
   width: ${(props) => props.barWidth && props.barWidth}%;
   display: block;
+  border-radius: 20px;
 `
 
 const useStyles = makeStyles((theme) => ({
@@ -71,108 +78,136 @@ const useStyles = makeStyles((theme) => ({
 
 export default function SignUp() {
   const classes = useStyles();
+
+  const {isMobile} = useContext(DefaultContext);
+
   const {
     exerciseData,
-    allExercises,
     handleNewExercise,
     barWidth,
     handlePause,
     setShow,
     show,
-    handleClose,
     cheat,
     handleFinishExercises,
     sentence,
     showSentence,
     setShowSentence,
-    isPaused
+    isPaused,
+    startCount
   } = ExerciseHook();
 
+
   return (
-    <Container component="main" maxWidth="lg">
-        
-        <Typography component="h2" variant="h4" color="primary" gutterBottom>
-          {exerciseData?.title}
-        </Typography>
-        
-        <Typography>
-          {exerciseData?.time} segundos || Repetições: {exerciseData?.repeatLimit}
-        </Typography>
-        
-        <div className={classes.paper}>
-            <Grid container spacing={2}>
-                <Grid item xs={12} sm={6}>
-                    <Box pt={2}>
-                        <img src={exerciseData?.image?.url} style={{width: '100%'}} alt="img" />
-                    </Box>
-                </Grid>
-                <Grid item xs={12} sm={6}>
-                    <Box pt={2}>
-                        <div
-                          dangerouslySetInnerHTML={{__html: exerciseData?.descricaoDoExercicio?.html}}
-                        />
-                        <br/>
-                        <Divider />
-                        <TimeBar>
-                          <TimeBarWrapper barWidth={barWidth}></TimeBarWrapper>
-                        </TimeBar>
-                        <div className={classes.root}>
-                            {exerciseData.prevId && (
-                              <Button variant="contained" size='medium' color="default" onClick={() => handleNewExercise(exerciseData.prevId)}>
-                                <SkipPreviousIcon />
-                              </Button>
-                            )}
-                            {/* <Button variant="contained" size='medium' color="secondary">
-                              <StopIcon />
-                            </Button> */}
-                            {isPaused && (
-                              <Button variant="contained" size='medium' color="primary" onClick={() => handlePause(false)}>
-                                <PlayArrowIcon />
-                              </Button>
-                            )}
+    <div style={{display: 'flex', flexDirection: isMobile ? 'column' : 'row', gap: isMobile ? 24 : 0}}>
+      <div style={{width: '100%', paddingTop: 24, paddingRight: '24px'}}>
+          <Typography component="h4" variant="h4" gutterBottom>
+            {exerciseData?.title}
+          </Typography>
 
-                            {!isPaused && (
-                              <Button variant="contained" size='medium' color="secondary" onClick={() => handlePause(true)}>
-                                <PauseIcon />
-                              </Button>
-                            )}
-                            
-                            {exerciseData.nextId && (
-                              <Button variant="contained" size='medium' color="default" onClick={() => handleNewExercise(exerciseData.nextId)}>
-                                <SkipNextIcon />
-                              </Button>
-                            )}
-                        </div>
-                    </Box>
-                </Grid>
+          <Typography variant="body1">
+            {exerciseData?.time} segundos || Repetições: {exerciseData?.repeatLimit}
+          </Typography>
+
+          <Grid container spacing={2}>
+            <Grid item xs={12} sm={12}>
+              <Box pt={2}>
+                <div
+                  style={{textAlign: '#707070'}}
+                  dangerouslySetInnerHTML={{__html: exerciseData?.descricaoDoExercicio?.html}}
+                />
+                <br/>
+                <TimeBar>
+                  <TimeBarWrapper barWidth={barWidth}></TimeBarWrapper>
+                </TimeBar>
+                <div style={{display: 'flex', justifyContent: 'space-between', padding: '16px 0px 0px'}}>
+                  {exerciseData.prevId && (
+                    <ButtonComponent
+                      label={<SkipPreviousIcon />}
+                      variant="contained"
+                      type="submit"
+                      format="info"
+                      onClick={() => handleNewExercise(exerciseData.prevId)}
+                    />
+                  )}
+
+                  {isPaused && (
+                    <ButtonComponent
+                      endIcon={<PlayArrowIcon />}
+                      label={'Começar exercício'}
+                      variant="contained"
+                      color="primary"
+                      type="submit"
+                      format="rounded"
+                      onClick={() => handlePause(false)}
+                    />
+                  )}
+
+                  {!isPaused && (
+                    <div style={{display: 'flex', alignItems: 'center', gap: '4px'}}>
+                      {/* <CircularProgress /> */}
+                      <ButtonComponent
+                        endIcon={<PauseIcon />}
+                        label={'Pausar exercício'}
+                        variant="contained"
+                        color="primary"
+                        type="submit"
+                        format="rounded"
+                        onClick={() => handlePause(true)}
+                      />
+                    </div>
+                  )}
+
+                  {exerciseData.nextId &&  (
+                    <ButtonComponent
+                      label={<SkipNextIcon />}
+                      variant="contained"
+                      type="submit"
+                      format="success"
+                      onClick={() => handleNewExercise(exerciseData.nextId)}
+                    />
+                  )}
+                  
+                </div>
+              </Box>
             </Grid>
-        </div>
+          </Grid>
+      </div>
+      
+      <div style={{width: '100%', paddingTop: isMobile ? 0 : 24, marginBottom: 24}}>
+          <div style={{width: '100%', background: COLORS.secondary, borderRadius: '20px 0px 0px 20px', padding: '24px'}}>
+            {exerciseData?.image && (
+              <img src={exerciseData?.image?.url} style={{width: '100%', borderRadius: '20px'}} alt="img" />
+            )}
+          </div>
+      </div>
+      
 
-        <SentenceModal {...{setShow, show, onClick: () => setShowSentence(true), buttonLabel: "Ver dica", modalTitle: "Frase motivacional"}}>
-          <Box width={"100%"}>
+      <SentenceModal {...{setShow, show, onClick: () => setShowSentence(true), buttonLabel: "Ver dica", modalTitle: "Frase motivacional"}}>
+        <Box width={"100%"}>
             <Card>
               <CardContent>
                 <Typography component="h2" variant="h5" color="primary" gutterBottom>Frase</Typography>
                 <div
-                  dangerouslySetInnerHTML={{__html: sentence?.sentence?.fraseCompleta?.html}}
-                />
-              </CardContent>
-            </Card>
-          </Box>
-        </SentenceModal>
+                dangerouslySetInnerHTML={{__html: sentence?.sentence?.fraseCompleta?.html}}
+              />
+            </CardContent>
+          </Card>
+        </Box>
+      </SentenceModal>
 
-        <Modal {...{setShow: showSentence, show: showSentence, onClick: handleFinishExercises, buttonLabel: "Ok, finalizar série", modalTitle: "Fim da série"}}>
-          <Box width={"100%"}>
-            <Card>
-              <CardContent>
-                <Typography component="h2" variant="h5" color="primary" gutterBottom>Dica</Typography>
-                <div
-                  dangerouslySetInnerHTML={{__html: cheat?.textoDaDica?.html}}
-                />
-              </CardContent>
-            </Card>
-          </Box>
-        </Modal>
-    </Container>
+      <Modal {...{setShow: showSentence, show: showSentence, onClick: handleFinishExercises, buttonLabel: "Ok, finalizar série", modalTitle: "Fim da série"}}>
+        <Box width={"100%"}>
+          <Card>
+            <CardContent>
+              <Typography component="h2" variant="h5" color="primary" gutterBottom>Dica</Typography>
+              <div
+                dangerouslySetInnerHTML={{__html: cheat?.textoDaDica?.html}}
+              />
+            </CardContent>
+          </Card>
+        </Box>
+      </Modal>
+    </div>
   );
 }

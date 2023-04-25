@@ -1,7 +1,7 @@
+import React from 'react';
 import axios from 'axios';
 import { useDispatch } from 'react-redux';
-import React from 'react';
-import { CircularProgress, LinearProgress } from '@material-ui/core';
+import { LinearProgress } from '@material-ui/core';
 import styled from 'styled-components';
 import {useSnackbar} from 'notistack';
 import moment from 'moment';
@@ -21,6 +21,7 @@ const LoadingWrapper = styled('div')`
   // justify-content: center;
   font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
 `
+
 let push;
 
 const InterceptorHooks = () => {

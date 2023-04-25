@@ -67,6 +67,9 @@ const theme = createTheme({
       fontSize: 20,
       color: '#fff'
     },
+    body1:{
+      color: '#707070'
+    },
     allVariants: {
       color: '#707070'
     },
