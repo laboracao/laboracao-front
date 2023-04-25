@@ -83,7 +83,7 @@ export default function SignIn() {
                 color="primary"
                 type="submit"
                 id="loginButton"
-                label="Sair"
+                label="Login"
                 size="small"
                 format="input"
               />
