@@ -68,7 +68,10 @@ const theme = createTheme({
       color: '#fff'
     },
     body1:{
-      color: '#707070'
+      color: COLORS.primary
+    },
+    body2:{
+      color: COLORS.secondary
     },
     allVariants: {
       color: '#707070'
