@@ -116,13 +116,25 @@ const Dashboard = () => {
                     </Box>
                 )}
                 
-                <Modal {...{setShow, show, onClick: handleAcceptTerm, buttonLabel: "Aceitar", modalTitle: termContent.titulo}}>
-                    <div
-                        dangerouslySetInnerHTML={{__html: termContent?.conteudo?.html}}
-                    />
-                </Modal>
+                <ModalV2
+                    {...{
+                        setShow,
+                        show,
+                        actionModal: handleAcceptTerm,
+                        actionModalLabel: "Aceitar",
+                        modalTitle: termContent.titulo
+                    }}>
+                        <div
+                            dangerouslySetInnerHTML={{__html: termContent?.conteudo?.html}}
+                        />
+                </ModalV2>
 
-                <Modal {...{setShow: setShowCheat, show: showInformation, onClick: () => setShowInformation(false), buttonLabel: "Fechar", modalTitle: "Informações sobre Ginástica Laboral", width: 80}}>
+                <ModalV2
+                    {...{
+                        show: showInformation,
+                        setShow: setShowInformation,
+                        modalTitle: "Informações sobre Ginástica Laboral"
+                    }}>
                     
                     <Box width={"100%"} display={"flex"} gridGap={"16px"} pb={"16px"}>
                         <Button variant="outlined" color="primary" onClick={() => handleGetInformation(0)}>
@@ -150,9 +162,14 @@ const Dashboard = () => {
                         </Box>
                     )}
                     
-                </Modal>
+                </ModalV2>
 
-                <Modal {...{setShow: setShowCheat, show: showCheat, onClick: () => setShowCheat(false), buttonLabel: "Fechar", modalTitle: 'Dicas', width: 80}}>
+                <ModalV2
+                    {...{
+                        show: showCheat,
+                        setShow: setShowCheat,
+                        modalTitle: 'Dicas'
+                    }}>
                     
                     <Box width={"100%"} display={"flex"} gridGap={"16px"} pb={"16px"}>
                         <Button variant="outlined" color="primary" onClick={() => handleGetCheat("postura")}>
@@ -180,19 +197,7 @@ const Dashboard = () => {
                         </Box>
                     )}
                     
-                </Modal>
-
-                {/* <ModalV2
-                    {... {
-                        modalTitle: 'Lista de grupo de exercícios',
-                        show: showExercises,
-                        setShow: setShowExercises,
-                        actionModal: handleOpenExercise,
-                        actionModalLabel: 'Começar exercícios'
-                    }}
-                >  
-
-                </ModalV2> */}
+                </ModalV2>
 
                 <ExercisesModal
                     {...{

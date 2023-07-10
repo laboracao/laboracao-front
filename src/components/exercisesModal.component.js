@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import {Box, Card, CardContent, Typography} from '@material-ui/core';
+import {Box, CardContent, Typography} from '@material-ui/core';
 
 import {COLORS} from '../styles/colors';
 
@@ -26,6 +26,7 @@ const ExercisesTable = styled('div')`
     .exercise-card{
         border-radius: 20px;
         box-shadow: 0px 0px 6px rgba(0,0,0,0.1);
+        background: ${COLORS.light0};
     }
 
     .exercise-card:nth-child(2n+1){
@@ -66,7 +67,6 @@ const ExercisesModal = ({setShow, show, handleCloseModal, handleOpenExercise, bu
     return (
         <ModalV2
             {...{show, setShow, actionModal: handleOpenExercise, actionModalLabel: buttonLabel, modalTitle}}
-            // {...{setShow, show, onClick: handleOpenExercise, buttonLabel, modalTitle, onClose: handleCloseModal}}
         >
             <ExercisesTable>
                 {userData?.exercises?.map((item) => (
@@ -83,7 +83,7 @@ const ExercisesModal = ({setShow, show, handleCloseModal, handleOpenExercise, bu
                                         <img src={subitem.image.url} />
                                         <div>
                                             <Typography>
-                                                {subitem.title}
+                                                <b>{subitem.title}</b>
                                             </Typography>
                                             <CustomTypograph>
                                                 Nº repetições: <b>{subitem.repeatLimit}</b>

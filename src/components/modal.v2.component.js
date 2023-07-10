@@ -23,6 +23,9 @@ const ModalCard = styled('div')`
   background: ${COLORS.light0};
   border-radius: 20px;
   overflow: hidden;
+  @media(max-width: 767px){
+    width: 90%; 
+  }
 `;
 
 const ModalTitle = styled('div')`
@@ -72,19 +75,21 @@ const Modal = ({
             label="Fechar"
             size="small"
             format="inputv2"
-            onClick={() => setShow(false)}
+            onClick={() => setShow(!show)}
           />
-
-          <ButtonComponent
-            variant="contained"
-            color="primary"
-            type="submit"
-            id="loginButton"
-            size="small"
-            format="input"
-            label={actionModalLabel}
-            onClick={actionModal}
-          />
+          {actionModalLabel && (
+            <ButtonComponent
+              variant="contained"
+              color="primary"
+              type="submit"
+              id="loginButton"
+              size="small"
+              format="input"
+              label={actionModalLabel}
+              onClick={actionModal}
+            />
+          )}
+          
         </ModalFooter>
       </ModalCard>
     </ModalOverlay>

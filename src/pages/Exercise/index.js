@@ -16,6 +16,8 @@ import SkipPreviousIcon from '@material-ui/icons/SkipPrevious';
 import PauseIcon from '@material-ui/icons/Pause';
 
 import Modal from '../../components/modal.component';
+import ModalV2 from '../../components/modal.v2.component';
+
 import SentenceModal from '../../components/sentenceModal.component';
 
 import ExerciseHook from '../../hooks/exercise.hook.v2';
@@ -162,7 +164,14 @@ export default function SignUp() {
         </Box>
       </SentenceModal>
 
-      <Modal {...{setShow: showSentence, show: showSentence, onClick: handleFinishExercises, buttonLabel: "Ok, finalizar série", modalTitle: "Fim da série"}}>
+      <ModalV2
+          {...{
+            setShow: showSentence,
+            show: showSentence,
+            actionModal: handleFinishExercises,
+            actionModalLabel: "Ok, finalizar série",
+            modalTitle: "Fim da série"
+          }}>
         <Box width={"100%"}>
           <Card>
             <CardContent>
@@ -173,7 +182,7 @@ export default function SignUp() {
             </CardContent>
           </Card>
         </Box>
-      </Modal>
+      </ModalV2>
     </div>
   );
 }
