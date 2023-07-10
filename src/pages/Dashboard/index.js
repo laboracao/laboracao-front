@@ -1,6 +1,6 @@
 import React, {useEffect, useContext} from "react";
+import moment from 'moment';
 import {Box, Grid, Typography, Card, CardContent, Button} from '@material-ui/core';
-import {COLORS} from '../../styles/colors';
 
 import DefaultContext from '../../stores/defaultContext';
 
@@ -51,19 +51,19 @@ const Dashboard = () => {
         if(showExercisesModal){
             setShowExercises(true);
         }
-    }, [showExercisesModal]);
+    }, [setShowExercises, showExercisesModal]);
 
     useEffect(() => {
         if(!showExercises){
             setShowExercisesModal(false);
         }
-    }, [showExercises]);
+    }, [setShowExercisesModal, showExercises]);
     
     return(
         <div style={{display: 'flex', flexDirection: isMobile ? 'column' : 'row', gap: isMobile ? 24 : 0}}>
             <div style={{width: '100%', paddingTop: 24, paddingRight: '24px'}}>
                 <Typography component="h4" variant="h4" gutterBottom>
-                    {new Date().toString()}
+                    {`Hoje, ${moment(new Date()).format('dd/mm/yyyy')}`}
                 </Typography>
 
                 <Box pt={3}>
