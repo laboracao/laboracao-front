@@ -63,7 +63,7 @@ const Dashboard = () => {
         <div style={{display: 'flex', flexDirection: isMobile ? 'column' : 'row', gap: isMobile ? 24 : 0}}>
             <div style={{width: '100%', paddingTop: 24, paddingRight: '24px'}}>
                 <Typography component="h4" variant="h4" gutterBottom>
-                    {`Hoje, ${moment(new Date()).format('dd/mm/yyyy')}`}
+                    {`Hoje, ${moment(new Date()).format('DD/MM/yyyy')}`}
                 </Typography>
 
                 <Box pt={3}>
