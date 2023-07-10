@@ -1,17 +1,49 @@
 import React, {useState, useEffect} from 'react';
 import {Box, Card, CardContent, Typography} from '@material-ui/core';
-import Modal from './modal.component';
+
+import {COLORS} from '../styles/colors';
+
+import ModalV2 from './modal.v2.component';
+
+
 import styled from 'styled-components';
 import {API, getUserDataInStorage} from '../services/api';
 
-const CustomCard = styled(Card)`
-    border-radius: 0px;
-`;
-
 const CustomCardContent = styled(CardContent)`
     display: flex;
+`;
+
+const CustomTypograph = styled(Typography)`
+    color: ${COLORS.gray0} !important;
+`
+
+const ExercisesTable = styled('div')`
+    width: 100%;
+    display: flex;
+    flex-direction: column;
     gap: 16px;
-    padding: 8px;
+
+    .exercise-card{
+        border-radius: 20px;
+        box-shadow: 0px 0px 6px rgba(0,0,0,0.1);
+    }
+
+    .exercise-card:nth-child(2n+1){
+        background: ${COLORS.light1}!important;
+    }
+`
+
+const CustomBox = styled(Box)`
+    padding: 20px;
+    margin-bottom: 0px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    img{
+        border-radius: 20px;
+        max-width: 100px;
+    }
+
 `
 
 const ExercisesModal = ({setShow, show, handleCloseModal, handleOpenExercise, buttonLabel, modalTitle}) => {
@@ -22,40 +54,49 @@ const ExercisesModal = ({setShow, show, handleCloseModal, handleOpenExercise, bu
     useEffect(() => {
         if(show){
             API.get(`/users/${_id}`).then((response) => {
+                console.log(response.data);
                 setUserData(response.data);
             }).catch((e) => {
                 console.log(e)
             })
         }
-    }, [show]);
+    }, [show, setUserData, _id]);
 
 
     return (
-        <Modal {...{setShow, show, onClick: handleOpenExercise, buttonLabel, modalTitle, onClose: handleCloseModal}}>
-            {userData?.exercises?.map((item) => (
-                <Box p={0} key={item?.nomeDoExercicio} width={'100%'}>
-                    <CustomCard>
-                        <CustomCardContent>
-                            <Typography variant="h6">
+        <ModalV2
+            {...{show, setShow, actionModal: handleOpenExercise, actionModalLabel: buttonLabel, modalTitle}}
+            // {...{setShow, show, onClick: handleOpenExercise, buttonLabel, modalTitle, onClose: handleCloseModal}}
+        >
+            <ExercisesTable>
+                {userData?.exercises?.map((item) => (
+                    <Box key={item?.nomeDoExercicio} width={'100%'} className='exercise-card'>
+                        <Box p={2} pb={0}>
+                            <Typography variant="h6" color='secondary'>
                                 {item.nomeDoExercicio}
                             </Typography>
-                            <Box display={'flex'} style={{gap: '12px', flexFlow: 'wrap'}}>
+                        </Box>
+                        <CustomCardContent>
+                            <ExercisesTable>
                                 {item.exercises.map((subitem) => (
-                                    <Box key={subitem?.title}>
-                                        <Typography>
-                                            {subitem.title}
-                                        </Typography>
-                                        <Typography>
-                                            Nº repetições: <b>{subitem.repeatLimit}</b>
-                                        </Typography>
-                                    </Box>
+                                    <CustomBox p={2} width={'100%'} key={subitem?.title} className='exercise-card'>
+                                        <img src={subitem.image.url} />
+                                        <div>
+                                            <Typography>
+                                                {subitem.title}
+                                            </Typography>
+                                            <CustomTypograph>
+                                                Nº repetições: <b>{subitem.repeatLimit}</b>
+                                            </CustomTypograph>
+                                        </div>
+                                    </CustomBox>
                                 ))}
-                            </Box>
+                            </ExercisesTable>
                         </CustomCardContent>
-                    </CustomCard>
-                </Box>
-            ))}
-        </Modal>
+                    </Box>
+                ))}
+            </ExercisesTable>
+        </ModalV2>
     )
 };
 

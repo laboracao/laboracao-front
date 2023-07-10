@@ -7,6 +7,8 @@ import DefaultContext from '../../stores/defaultContext';
 import CardV2 from "../../components/card.v2.component";
 
 import Modal from "../../components/modal.component";
+import ModalV2 from "../../components/modal.v2.component";
+
 import ExercisesModal from '../../components/exercisesModal.component';
 import DashboardHook from "../../hooks/dashboard.hook";
 import ExercisesHook from "../../hooks/exercises.hook";
@@ -180,7 +182,29 @@ const Dashboard = () => {
                     
                 </Modal>
 
-                <ExercisesModal {...{userData, setShow: setShowExercises, show: showExercises, handleCloseModal, handleOpenExercise, buttonLabel: "Começar série", modalTitle: "Lista de grupo de exercícios"}}/>
+                {/* <ModalV2
+                    {... {
+                        modalTitle: 'Lista de grupo de exercícios',
+                        show: showExercises,
+                        setShow: setShowExercises,
+                        actionModal: handleOpenExercise,
+                        actionModalLabel: 'Começar exercícios'
+                    }}
+                >  
+
+                </ModalV2> */}
+
+                <ExercisesModal
+                    {...{
+                        userData,
+                        setShow: setShowExercises,
+                        show: showExercises,
+                        handleCloseModal,
+                        handleOpenExercise,
+                        buttonLabel: "Começar série",
+                        modalTitle: "Lista de grupo de exercícios"
+                    }}
+                />
             </div>
             {/* <div style={{width: '100%', paddingTop: 24}}>
                 <div style={{width: '100%', background: COLORS.secondary, borderRadius: '20px 0px 0px 20px', padding: '24px'}}>

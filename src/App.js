@@ -24,8 +24,11 @@ const theme = createTheme({
       main: COLORS.primary,
     },
     secondary: {
-      main: COLORS.dark1,
-    }
+      main: COLORS.secondary
+    },
+    textColor: {
+      main: COLORS.gray0,
+    },
   },
   typography: {
     fontSize: 12,

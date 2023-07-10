@@ -49,8 +49,9 @@ const ModalBody = styled('div')`
 `
 
 const ModalTitleLabel = styled(Typography)`
-    color: ${COLORS.primary};
-    font-size: 1.28rem;
+    color: ${COLORS.secondary} !important;
+    font-size: 1.28rem !important;
+    font-weight: bold !important;
 `;
 
 const ModalActions = styled('div')`
@@ -65,7 +66,7 @@ const ModalComponent = ({show, setShow, onClick, buttonLabel, modalTitle, childr
             <AchievementsModalWrapper className='main-background' {...{width}}>
                 <div>
                     <ModalTitle>
-                        <ModalTitleLabel className="main-text">{modalTitle}</ModalTitleLabel>
+                        <ModalTitleLabel>{modalTitle}</ModalTitleLabel>
                     </ModalTitle>
                     {children && (
                         <ModalBody>
@@ -81,7 +82,7 @@ const ModalComponent = ({show, setShow, onClick, buttonLabel, modalTitle, childr
                 </div>
                 <ModalActions>
                     {onClose && (
-                        <Button color="primary" variant="outlined" onClick={onClose}>
+                        <Button color="secodary" variant="outlined" onClick={onClose}>
                             Fechar
                         </Button>
                     )}

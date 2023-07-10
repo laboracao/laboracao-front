@@ -15,6 +15,10 @@ const useStyles = makeStyles((theme) => ({
       color: "#fff",
       fontWeight: "bold"
     },
+    inputv2: {
+      borderRadius: '10px',
+      fontWeight: "bold"
+    },
     rounded: {
       borderRadius: '100px',
       color: "#fff",
