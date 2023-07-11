@@ -44,7 +44,6 @@ const useStyles = makeStyles((theme) => ({
 
 const ButtonComponent = ({label, format, ...props}) => {
     const classes = useStyles();
-
     return (
         <CustomButton {...props} className={classes[format]}>
             {label}

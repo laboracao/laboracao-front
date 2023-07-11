@@ -59,7 +59,7 @@ export default function SignUp() {
     showSentence,
     setShowSentence,
     isPaused,
-    play
+    buttonDisabled
   } = ExerciseHook();
 
   return (
@@ -73,9 +73,9 @@ export default function SignUp() {
             {exerciseData?.time} segundos || Repetições: {exerciseData?.repeatLimit}
           </Typography>
 
-          {play && (
+          {/* {play && (
             <audio src={NotifyAudio} autoPlay controls />
-          )}
+          )} */}
 
           <Grid container spacing={2}>
             <Grid item xs={12} sm={12}>

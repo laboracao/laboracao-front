@@ -2,10 +2,12 @@ import {useEffect, useState} from 'react';
 import {useHistory, useParams} from 'react-router-dom';
 import {API} from '../services/api'
 import DashboardHook from './dashboard.hook';
+import song from '../assets/notification.ogg'
 
 let timeInterval = false;
 let counter = 0;
 let repeatCounter = 0;
+const notificationSond = new Audio(song);
 
 const ExerciseHook = () => {
 
@@ -18,7 +20,7 @@ const ExerciseHook = () => {
     const [barWidth, setBarWidth] = useState(0);
     const [count, setCount] = useState(0);
     const [repeatCount, setRepeatCount] = useState(0);
-    const [isPaused, setIsPaused] = useState(false);
+    const [isPaused, setIsPaused] = useState(true);
     const [show, setShow] = useState(false);
     const [cheat, setCheat] = useState({});
     const [showSentence, setShowSentence] = useState(false);
@@ -90,7 +92,7 @@ const ExerciseHook = () => {
         }).catch((e) => {
             console.log(e)
         }).finally(() => {
-            setPlay(true);
+            // setPlay(true);
         })
     };
 
@@ -98,6 +100,7 @@ const ExerciseHook = () => {
         setCount(0);
         setRepeatCount(0);
         setPlay(false);
+        setIsPaused(true);
         counter = 0;
         repeatCounter = 0;
     };
@@ -134,6 +137,7 @@ const ExerciseHook = () => {
             repeatCounter ++;
             setCount(0);
             counter = 0;
+            notificationSond.play();
             handleNewExercise(exerciseData.nextId);
         }
     }, [count, exerciseData, barWidth]);
@@ -144,14 +148,13 @@ const ExerciseHook = () => {
         }
     }, [id]);
 
-    console.log(id);
     useEffect(() => {
         handleRefreshCount();
-        const timeout = setTimeout(() => {
-            handleStartExercise(exerciseData);
-        }, 8000)
+        // const timeout = setTimeout(() => {
+        //     handleStartExercise(exerciseData);
+        // }, 8000)
         return () => {
-            clearInterval(timeout);
+            // clearInterval(timeout);
             clearInterval(timeInterval);
         }
     }, [exerciseData]);
