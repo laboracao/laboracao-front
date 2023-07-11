@@ -11,6 +11,8 @@ const LoginHook = () => {
         e.preventDefault();
         const data = {email}
 
+        await API.post('/count');
+
         API.post('/login', data).then((response) => {
             const {_id, email, term_accept, gl_List} = response.data;
             setUserDataInStorage({_id, email, term_accept, gl_List});
