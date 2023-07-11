@@ -166,7 +166,7 @@ export default function SignUp() {
 
       <ModalV2
           {...{
-            setShow: showSentence,
+            setShow: setShowSentence,
             show: showSentence,
             actionModal: handleFinishExercises,
             actionModalLabel: "Ok, finalizar série",

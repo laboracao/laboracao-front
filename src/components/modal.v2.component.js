@@ -7,7 +7,7 @@ const ModalOverlay = styled('div')`
   width: 100%;
   height: 100vh;
   position: absolute;
-  z-index: 1000;
+  z-index: 11001;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -18,7 +18,7 @@ const ModalOverlay = styled('div')`
 `;
 
 const ModalCard = styled('div')`
-  width: 50%;
+  width: 70%;
   height: auto;
   background: ${COLORS.light0};
   border-radius: 20px;
@@ -40,6 +40,11 @@ const ModalContent = styled('div')`
   padding: 16px 24px;
   max-height: 60vh;
   overflow-y: auto;
+  overflow-x: auto;
+  img{
+    width: 100%;
+    height: auto;
+  }
 `
 const ModalFooter = styled('div')`
   width: 100%;
