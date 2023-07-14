@@ -8,9 +8,9 @@ import DefaultContext from '../../stores/defaultContext';
 
 import CardV2 from "../../components/card.v2.component";
 
-import Modal from "../../components/modal.component";
 import ModalV2 from "../../components/modal.v2.component";
 import Count from '../../components/count.component';
+import Gamification from '../../components/gamification.component';
 
 import ExercisesModal from '../../components/exercisesModal.component';
 import DashboardHook from "../../hooks/dashboard.hook";
@@ -134,11 +134,11 @@ const Dashboard = () => {
                 
                 
             </div>
-            {/* <div style={{width: '100%', paddingTop: 24}}>
+            <div style={{width: '100%', paddingTop: 24}}>
                 <div style={{width: '100%', background: COLORS.secondary, borderRadius: '20px 0px 0px 20px', padding: '24px'}}>
-                    Gamification
+                    <Gamification />
                 </div>
-            </div> */}
+            </div>
         </div>
         <ModalV2
             {...{
