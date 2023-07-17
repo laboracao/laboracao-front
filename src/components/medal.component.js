@@ -24,7 +24,7 @@ const MedalWrapper = styled('div')`
 
 const Medal = ({color, rule, yourGamificationData}) => {
 
-  const enableMedal = yourGamificationData.exerciseCompleteCount >= rule;
+  const enableMedal = yourGamificationData?.exerciseCompleteCount >= rule;
   const ruleDetail = !enableMedal ? `Você deve completar ${rule} ou mais exercídios para ganhar.` : `Parábens!!! Você conquistou esse prêmio por ter completado ${rule} exercícios.` 
 
   return (

@@ -34,21 +34,12 @@ const Gamification = () => {
 
     try{
       const response = await API.post(`/gamification/user`, data);
-      console.log(response);
       setYourGamificationData(response.data[0]);
     }catch(e){
       console.log(e)
     };
     
   }
-
-  useEffect(() => {
-    console.log(gamificationData);
-  }, [gamificationData])
-
-  useEffect(() => {
-    console.log(yourGamificationData);
-  }, [yourGamificationData])
 
   useEffect(() => {
     handleGetGamification();
