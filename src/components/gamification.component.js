@@ -1,6 +1,7 @@
 import { Typography } from '@material-ui/core';
 import { useEffect, useState } from 'react';
 import {API, getUserDataInStorage} from '../services/api';
+import Medal from './medal.component';
 import Position from './position.component';
 
 const Gamification = () => {
@@ -33,6 +34,7 @@ const Gamification = () => {
 
     try{
       const response = await API.post(`/gamification/user`, data);
+      console.log(response);
       setYourGamificationData(response.data[0]);
     }catch(e){
       console.log(e)
@@ -69,15 +71,26 @@ const Gamification = () => {
             Seus pontos
           </Typography>
           <Typography variant="h1" color="primary">
-            {yourGamificationData.exerciseCompleteCount}
+            {yourGamificationData?.exerciseCompleteCount}
           </Typography>
         </div>
       </div>
-      <div style={{display: 'flex', width: '60%', justifyContent: 'space-between', alignItems: 'flex-end', height: '300px'}}>
-        <Position position={2}/>
-        <Position position={1}/>
-        <Position position={3}/>
+      <div style={{display: 'flex', width: '60%', justifyContent: 'space-between', alignItems: 'flex-end', height: '200px'}}>
+        <Position position={2} item={gamificationData[1]}/>
+        <Position position={1} item={gamificationData[0]}/>
+        <Position position={3} item={gamificationData[2]}/>
       </div>
+      <div style={{width: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center', marginTop: 24}}>
+        <Typography variant="h5" >
+          <b>Suas conquistas</b>
+        </Typography>
+        <div style={{marginTop: '24px', display: 'flex', width: '60%', justifyContent: 'space-between', alignItems: 'flex-end'}}>
+          <Medal color="bronze" rule={20} yourGamificationData={yourGamificationData}/>
+          <Medal color="silver" rule={30} yourGamificationData={yourGamificationData}/>
+          <Medal color="gold" rule={50} yourGamificationData={yourGamificationData}/>
+        </div>
+      </div>
+      
     </div>
   )
 };

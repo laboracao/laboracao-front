@@ -1,6 +1,6 @@
 import {useEffect, useState} from 'react';
 import {useHistory, useParams} from 'react-router-dom';
-import {API} from '../services/api'
+import {API, getUserDataInStorage} from '../services/api'
 import DashboardHook from './dashboard.hook';
 import song from '../assets/notification.ogg'
 
@@ -30,6 +30,20 @@ const ExerciseHook = () => {
     const handleClose = () => {
         setShow(false);
     };
+
+    const handlePlusPoint = async () => {
+        const {email} = getUserDataInStorage();
+        const exerciseCompleteCount = 1;
+        const data = {email, exerciseCompleteCount};
+
+        try{
+            const response = await API.post('/gamification', data);
+            console.log(response);
+        }catch(e){
+            console.log(e);
+        }
+
+    }
 
     const handleFinishExercises = () => {
         handleClose();
@@ -138,6 +152,7 @@ const ExerciseHook = () => {
             setCount(0);
             counter = 0;
             notificationSond.play();
+            handlePlusPoint();
             handleNewExercise(exerciseData.nextId);
         }
     }, [count, exerciseData, barWidth]);

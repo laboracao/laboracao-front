@@ -3,13 +3,14 @@ import PersonIcon from '@mui/icons-material/Person';
 import {COLORS} from '../styles/colors';
 
 
-const Position = ({position}) => {
+const Position = ({position, item}) => {
+
   return (
     <div style={{height: position === 1 ? '100%' : position === 2 ? '75%' : '50%'}}>
       <div style={{display: 'flex', flexDirection: 'column', alignItems: 'center', height: '100%'}}>
-        <Typography variant="h5"><b>123</b></Typography>
+        <Typography variant="h5"><b>{item?.exerciseCompleteCount}</b></Typography>
         <div style={{height: '100%', borderRadius: '20px', background: '#00000025', width:'80px', display: 'flex', flexDirection: 'column', justifyContent: 'flex-end', alignItems: 'center', padding: '16px'}}>
-          <Tooltip title="teste" arrow>
+          <Tooltip title={item?.email} arrow>
             <div style={{
               background: COLORS[position === 1 ? 'primary' : position === 2 ? 'info' : 'success'],
               color: COLORS.light0,
