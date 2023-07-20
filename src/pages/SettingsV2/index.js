@@ -1,5 +1,5 @@
 import React, {useContext, useEffect, useState} from "react";
-import {Box, Grid, Typography} from '@material-ui/core';
+import {Box, Grid, Typography, Tooltip} from '@material-ui/core';
 import { Alert } from '@material-ui/lab';
 
 import DefaultContext from '../../stores/defaultContext';
@@ -29,7 +29,11 @@ const Form = ({handleFormChange, formValues}) => {
         <div style={{display: 'flex', flexDirection: 'column', gap: '24px'}}>
             <div style={{display: 'flex', alignItems: 'center', gap: '8px'}}>
                 <div style={{width: '30%'}}>
-                    <Typography variant="h4">GL Preparatória:</Typography>
+                    <Tooltip arrow title="Tem como objetivo preparar os funcionários para atividades de agilidade, força ou resistência.">
+                        <Typography variant='h4'>
+                            GL Preparatória:
+                        </Typography>
+                    </Tooltip>
                 </div>
                 <div style={{display: 'flex', alignItems: 'center', gap: '8px'}}>
                     <Input
@@ -61,7 +65,9 @@ const Form = ({handleFormChange, formValues}) => {
             </div>
             <div style={{display: 'flex', alignItems: 'center', gap: '8px'}}>
                 <div style={{width: '30%'}}>
-                    <Typography variant="h4">GL Compensatória:</Typography>
+                    <Tooltip arrow title="Tem como objetivo amenizar as tensões, fortalecer as musculaturas, além de prevenir os vícios de postura.">
+                        <Typography variant="h4">GL Compensatória:</Typography>
+                    </Tooltip>
                 </div>
                 <div style={{display: 'flex', alignItems: 'center', gap: '8px'}}>
                     <Input
@@ -93,7 +99,10 @@ const Form = ({handleFormChange, formValues}) => {
             </div>
             <div style={{display: 'flex', alignItems: 'center', gap: '8px'}}>
                 <div style={{width: '30%'}}>
-                    <Typography variant="h4">GL Relaxamento:</Typography>
+                    <Tooltip arrow title="Tem como objetivo promover o alongamento da musculatura.">
+                        <Typography variant="h4">GL Relaxamento:</Typography>
+                    </Tooltip>
+                    
                 </div>
                 <div style={{display: 'flex', alignItems: 'center', gap: '8px'}}>
                     <Input
@@ -136,7 +145,7 @@ const FormWater = ({handleFormChange, formValues}) => {
                 </div>
                 <div style={{display: 'flex', alignItems: 'center', gap: '8px'}}>
                     <div>
-                        <Typography variant="body1">Hora: </Typography>
+                        <small style={{fontSize: '12px', color: '#fff'}}>Hora: </small>
                         <Input
                             variant="outlined"
                             type="number"
@@ -154,7 +163,7 @@ const FormWater = ({handleFormChange, formValues}) => {
                     </div>
                     <p>:</p>
                     <div>
-                        <Typography variant="body1">Minuto: </Typography>
+                        <small style={{fontSize: '12px', color: '#fff'}}>Minuto: </small>
                         <Input
                             variant="outlined"
                             type="number"

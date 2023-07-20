@@ -78,6 +78,10 @@ const theme = createTheme({
     body1:{
       color: COLORS.primary
     },
+    small:{
+      color: '#fff',
+      fontSize: 12,
+    },
     body2:{
       color: COLORS.secondary
     },

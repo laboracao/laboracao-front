@@ -45,7 +45,8 @@ const ExerciseHook = () => {
 
     }
 
-    const handleFinishExercises = () => {
+    const handleFinishExercises = async () => {
+        handlePlusPoint();
         handleClose();
         API.get(`/users/${_id}/finish-exercises`).then((response) => {
             history.push(`/dashboard`);
