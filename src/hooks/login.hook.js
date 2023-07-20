@@ -14,8 +14,8 @@ const LoginHook = () => {
         await API.post('/count');
 
         API.post('/login', data).then((response) => {
-            const {_id, email, term_accept, gl_List} = response.data;
-            setUserDataInStorage({_id, email, term_accept, gl_List});
+            const {_id, email, term_accept, gl_List, autoplay} = response.data;
+            setUserDataInStorage({_id, email, term_accept, gl_List, autoplay});
             history.push('/dashboard');
         }).catch((e) => {
             console.log(e);

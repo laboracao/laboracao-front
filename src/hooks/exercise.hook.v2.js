@@ -4,6 +4,7 @@ import {API, getUserDataInStorage} from '../services/api'
 import DashboardHook from './dashboard.hook';
 import song from '../assets/notification.ogg'
 
+let timeout = false;
 let timeInterval = false;
 let counter = 0;
 let repeatCounter = 0;
@@ -20,12 +21,14 @@ const ExerciseHook = () => {
     const [barWidth, setBarWidth] = useState(0);
     const [count, setCount] = useState(0);
     const [repeatCount, setRepeatCount] = useState(0);
-    const [isPaused, setIsPaused] = useState(true);
+    const [isPaused, setIsPaused] = useState(false);
     const [show, setShow] = useState(false);
     const [cheat, setCheat] = useState({});
     const [showSentence, setShowSentence] = useState(false);
     const [sentence, setSentence] = useState({});
     const [play, setPlay] = useState(false);
+    const [enableButton, setEnableButton] = useState(false);
+    const [autoplay] = useState(getUserDataInStorage().autoplay);
 
     const handleClose = () => {
         setShow(false);
@@ -42,7 +45,6 @@ const ExerciseHook = () => {
         }catch(e){
             console.log(e);
         }
-
     }
 
     const handleFinishExercises = async () => {
@@ -116,6 +118,7 @@ const ExerciseHook = () => {
         setRepeatCount(0);
         setPlay(false);
         setIsPaused(true);
+        setEnableButton(false);
         counter = 0;
         repeatCounter = 0;
     };
@@ -153,7 +156,6 @@ const ExerciseHook = () => {
             setCount(0);
             counter = 0;
             notificationSond.play();
-            // handlePlusPoint();
             handleNewExercise(exerciseData.nextId);
         }
     }, [count, exerciseData, barWidth]);
@@ -166,14 +168,20 @@ const ExerciseHook = () => {
 
     useEffect(() => {
         handleRefreshCount();
-        // const timeout = setTimeout(() => {
-        //     handleStartExercise(exerciseData);
-        // }, 8000)
+        if(autoplay){
+            timeout = setTimeout(() => {
+                handlePause(false);
+                setEnableButton(true);
+                // handleStartExercise(exerciseData);
+            }, 8000)
+        }
         return () => {
-            // clearInterval(timeout);
+            if(timeout){
+                clearInterval(timeout);
+            }
             clearInterval(timeInterval);
         }
-    }, [exerciseData]);
+    }, [exerciseData, autoplay]);
 
     useEffect(() => {
         if(!isPaused){
@@ -200,7 +208,9 @@ const ExerciseHook = () => {
         showSentence,
         setShowSentence,
         sentence,
-        play, setPlay
+        play, setPlay,
+        enableButton,
+        autoplay
     }
 };
 

@@ -14,7 +14,8 @@ const SettingsHook = () => {
         minuto1: 0,
         minuto2: 0,
         minuto3: 0,
-        minuto4: 0
+        minuto4: 0,
+        checked: false
     });
 
     const [hora1, setHora1] = useState(0);
@@ -26,7 +27,8 @@ const SettingsHook = () => {
     const [minuto3, setMinuto3] = useState(0);
     const [minuto4, setMinuto4] = useState(0);
     const [waterSchedule, setWaterSchedule] = useState([]);
-  
+    const [checked, setChecked] = useState(getUserDataInStorage().autoplay || false);
+
     const handleChange = (event) => {
       setValue(event.target.value);
     };
@@ -44,26 +46,6 @@ const SettingsHook = () => {
   
     const handleSubmit = async (e) => {
       e.preventDefault();
-
-    //   const data = {
-    //     day: value,
-    //     gl_start: {
-    //     hour: hora1 ||  0,
-    //     minute: minuto1 ||  0
-    //     },
-    //     gl_middle: {
-    //     hour: hora2 ||  0,
-    //     minute: minuto2 ||  0
-    //     },
-    //     gl_end: {
-    //     hour: hora3 ||  0,
-    //     minute: minuto3 ||  0
-    //     },
-    //     water_config: {
-    //     hour: hora4 ||  0,
-    //     minute: minuto4 ||  0
-    //     }
-    //   }
   
       await API.post('/hours', {hour: formValues.hora4, minute: formValues.minuto4}).then((response) => {
             const {listHours} = response.data;
@@ -75,6 +57,7 @@ const SettingsHook = () => {
 
     const handleEditSettings = async (value, formValues, waterSchedule) => {
         const data = {
+            autoplay: checked,
             day_config: {
                 day: value,
                 gl_start: {
@@ -162,7 +145,9 @@ const SettingsHook = () => {
         handleChange,
         formValues,
         handleFormChange,
-        handleChangeV2
+        handleChangeV2,
+        checked,
+        setChecked
     }
 }
 

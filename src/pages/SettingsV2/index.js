@@ -1,5 +1,9 @@
 import React, {useContext, useEffect, useState} from "react";
 import {Box, Grid, Typography, Tooltip} from '@material-ui/core';
+
+import FormGroup from '@mui/material/FormGroup';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import Checkbox from '@mui/material/Checkbox';
 import { Alert } from '@material-ui/lab';
 
 import DefaultContext from '../../stores/defaultContext';
@@ -195,7 +199,9 @@ const Settings = () => {
         handleSubmit,
         handleChangeV2,
         formValues,
-        handleFormChange
+        handleFormChange,
+        checked,
+        setChecked
     } = SettingsHook();
 
     useEffect(() => {
@@ -232,6 +238,10 @@ const Settings = () => {
                     <Typography component="h4" variant="h4" gutterBottom>
                         Configurações do usuário
                     </Typography>
+
+                    <FormGroup>
+                        <FormControlLabel control={<Checkbox color="primary" value={checked} onClick={() => setChecked(!checked)} checked={checked} />} label="Passar exercícios automaticamente?" />
+                    </FormGroup>
 
                     <Box pt={2}>
                         <Grid container spacing={3}>

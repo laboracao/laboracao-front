@@ -47,6 +47,7 @@ export default function SignUp() {
   const {isMobile} = useContext(DefaultContext);
 
   const {
+    enableButton,
     exerciseData,
     handleNewExercise,
     barWidth,
@@ -59,7 +60,7 @@ export default function SignUp() {
     showSentence,
     setShowSentence,
     isPaused,
-    buttonDisabled
+    autoplay
   } = ExerciseHook();
 
   return (
@@ -72,10 +73,6 @@ export default function SignUp() {
           <Typography variant="body1">
             {exerciseData?.time} segundos || Repetições: {exerciseData?.repeatLimit}
           </Typography>
-
-          {/* {play && (
-            <audio src={NotifyAudio} autoPlay controls />
-          )} */}
 
           <Grid container spacing={2}>
             <Grid item xs={12} sm={12}>
@@ -99,7 +96,20 @@ export default function SignUp() {
                     />
                   )}
 
-                  {isPaused && (
+                  {isPaused && autoplay && (
+                    <ButtonComponent
+                      endIcon={<PlayArrowIcon />}
+                      label={!enableButton ? 'O exercício vai começar' : 'Retomar exercício'}
+                      variant="contained"
+                      color="primary"
+                      type="submit"
+                      format="rounded"
+                      disabled={!enableButton}
+                      onClick={() => handlePause(false)}
+                    />
+                  )}
+
+                  {isPaused && !autoplay && (
                     <ButtonComponent
                       endIcon={<PlayArrowIcon />}
                       label={'Começar exercício'}
