@@ -152,7 +152,7 @@ const ExerciseHook = () => {
             setCount(0);
             counter = 0;
             notificationSond.play();
-            handlePlusPoint();
+            // handlePlusPoint();
             handleNewExercise(exerciseData.nextId);
         }
     }, [count, exerciseData, barWidth]);

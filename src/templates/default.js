@@ -52,7 +52,7 @@ export default function PersistentDrawerLeft({ children }) {
           <div >
             <img src={LOGO2} style={{width: '45px'}} />
           </div>
-          <div style={{height: '80%', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center'}}>
+          <div style={{marginTop: '20px', height: '80%', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'flex-start'}}>
             <Menu />
           </div>
         </div>

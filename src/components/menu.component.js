@@ -16,7 +16,7 @@ const ItemMenu = styled('div')`
     display: flex;
     margin-top: 8px;
     flexDirection: column;
-    align-items: center;
+    align-items: start;
     justify-content: center;
     cursor: pointer;
     :hover{

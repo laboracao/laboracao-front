@@ -135,35 +135,42 @@ const FormWater = ({handleFormChange, formValues}) => {
                     <Typography variant="h6">Beber água a cada:</Typography>
                 </div>
                 <div style={{display: 'flex', alignItems: 'center', gap: '8px'}}>
-                    <Input
-                        variant="outlined"
-                        type="number"
-                        fullWidth
-                        id="hora4"
-                        size="small"
-                        placeholder="Hora"
-                        name="hora4"
-                        autoComplete="lname"
-                        onChange={handleFormChange}
-                        value={'' || formValues.hora4}
-                        format="input"
-                        style={{background: "#fff", borderRadius: '12px'}}
-                    />
+                    <div>
+                        <Typography variant="body1">Hora: </Typography>
+                        <Input
+                            variant="outlined"
+                            type="number"
+                            fullWidth
+                            id="hora4"
+                            size="small"
+                            placeholder="Hora"
+                            name="hora4"
+                            autoComplete="lname"
+                            onChange={handleFormChange}
+                            value={'' || formValues.hora4}
+                            format="input"
+                            style={{background: "#fff", borderRadius: '12px'}}
+                        />
+                    </div>
                     <p>:</p>
-                    <Input
-                        variant="outlined"
-                        type="number"
-                        fullWidth
-                        id="minuto4"
-                        size="small"
-                        placeholder="Minuto"
-                        name="minuto4"
-                        autoComplete="lname"
-                        inputProps={{min: formValues.hora4 == 0 ? 1 : 0}}
-                        onChange={handleFormChange}
-                        value={'' || formValues.minuto4}
-                        style={{background: "#fff", borderRadius: '12px'}}
-                    />
+                    <div>
+                        <Typography variant="body1">Minuto: </Typography>
+                        <Input
+                            variant="outlined"
+                            type="number"
+                            fullWidth
+                            id="minuto4"
+                            size="small"
+                            placeholder="Minuto"
+                            name="minuto4"
+                            autoComplete="lname"
+                            inputProps={{min: formValues.hora4 == 0 ? 1 : 0}}
+                            onChange={handleFormChange}
+                            value={'' || formValues.minuto4}
+                            style={{background: "#fff", borderRadius: '12px'}}
+                        />
+                    </div>
+                    
                 </div>
             </div>
         </div>
