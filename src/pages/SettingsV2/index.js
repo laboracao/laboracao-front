@@ -240,7 +240,7 @@ const Settings = () => {
                     </Typography>
 
                     <FormGroup>
-                        <FormControlLabel control={<Checkbox color="primary" value={checked} onClick={() => setChecked(!checked)} checked={checked} />} label="Passar exercícios automaticamente?" />
+                        <FormControlLabel control={<Checkbox color="primary" value={checked} onClick={() => setChecked(!checked)} checked={checked} />} label="Passar exercícios automaticamente" />
                     </FormGroup>
 
                     <Box pt={2}>

@@ -77,8 +77,8 @@ const Gamification = () => {
         </Typography>
         <div style={{marginTop: '24px', display: 'flex', width: '60%', justifyContent: 'space-between', alignItems: 'flex-end'}}>
           <Medal color="bronze" rule={10} yourGamificationData={yourGamificationData}/>
-          <Medal color="silver" rule={15} yourGamificationData={yourGamificationData}/>
-          <Medal color="gold" rule={25} yourGamificationData={yourGamificationData}/>
+          <Medal color="silver" rule={20} yourGamificationData={yourGamificationData}/>
+          <Medal color="gold" rule={30} yourGamificationData={yourGamificationData}/>
         </div>
       </div>
       
