@@ -26,7 +26,7 @@ const Medal = ({color, rule, yourGamificationData}) => {
 
   const enableMedal = yourGamificationData?.exerciseCompleteCount >= rule;
   //Parabéns!!! Você conquistou esta medalha por ter completado 10 séries.
-  const ruleDetail = !enableMedal ? `Complete ${rule} séries para ganhar ${color === 'gold' ? 'o trofeu' : 'a medalha'}.` : `Parábens!!! Você conquistou ${color === 'gold' ? 'esse trofeu' : 'essa medalha'} por ter completado ${rule} exercícios.` 
+  const ruleDetail = !enableMedal ? `Complete ${rule} séries para ganhar ${color === 'gold' ? 'o trofeu' : 'a medalha'}.` : `Parabéns!!! Você conquistou ${color === 'gold' ? 'esse trofeu' : 'essa medalha'} por ter completado ${rule} séries.` 
 
   return (
     <Tooltip arrow title={ruleDetail} >
