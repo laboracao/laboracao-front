@@ -66,10 +66,10 @@ const Gamification = () => {
           </Typography>
         </div>
       </div>
-      <div style={{display: 'flex', width: '60%', justifyContent: 'space-between', alignItems: 'flex-end', height: '200px'}}>
-        <Position position={2} item={gamificationData[1]}/>
-        <Position position={1} item={gamificationData[0]}/>
-        <Position position={3} item={gamificationData[2]}/>
+      <div style={{display: 'flex', width: '60%', justifyContent: 'center', gap: '20px', alignItems: 'flex-end', height: '200px'}}>
+        {gamificationData[1] && (<Position position={2} item={gamificationData[1]}/>)}
+        {gamificationData[0] && (<Position position={1} item={gamificationData[0]}/>)}
+        {gamificationData[2] && (<Position position={3} item={gamificationData[2]}/>)}
       </div>
       <div style={{width: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center', marginTop: 24}}>
         <Typography variant="h5" >
